@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusCore Optimizer | Next-Gen System & Game Performance Boosters</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Inter, Sora & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        nexus: {
+                            orange: '#FF6B00',
+                            amber: '#FFA800',
+                            darkOrange: '#C84400',
+                            gold: '#FFD700',
+                            black: '#070709',
+                            cardBg: '#121217',
+                            cardBorder: '#23232C'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --easing-apple: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body {
+            background-color: #070709;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 1. BACKGROUND BOKEH & GLASS SPHERES */
+        .bokeh-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bokeh-ball {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: floatBokeh 18s infinite ease-in-out alternate;
+        }
+        @keyframes floatBokeh {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -60px) scale(1.15); }
+            100% { transform: translate(-30px, 50px) scale(0.9); }
+        }
+
+        .glass-sphere {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 107, 0, 0.15) 40%, rgba(10, 10, 15, 0.6) 80%);
+            box-shadow: 
+                inset 0 4px 10px rgba(255, 255, 255, 0.6),
+                inset -6px -10px 20px rgba(0, 0, 0, 0.7),
+                0 20px 40px rgba(255, 107, 0, 0.25);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            animation: sphereFloat 22s infinite ease-in-out alternate;
+        }
+        @keyframes sphereFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-35px) rotate(15deg); }
+            100% { transform: translateY(20px) rotate(-10deg); }
+        }
+
+        /* Mouse Aura Follower */
+        #mouse-aura {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 450px;
+            height: 450px;
+            margin-top: -225px;
+            margin-left: -225px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.16) 0%, rgba(255, 168, 0, 0.05) 45%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: screen;
+            will-change: transform;
+        }
+
+        .orange-gradient-text {
+            background: linear-gradient(135deg, #FFE2B8 0%, #FF6B00 50%, #C84400 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .luxury-sub-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px) scale(0.96);
+            filter: blur(8px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                        filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        .card-glass {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 107, 0, 0.07) 100%);
+            backdrop-filter: blur(28px) saturate(190%) brightness(1.08);
+            -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(1.08);
+            border-radius: 28px;
+            box-shadow: 
+                inset 0 1.5px 0 0 rgba(255, 255, 255, 0.55),
+                inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.6),
+                0 20px 60px -10px rgba(0, 0, 0, 0.7);
+            transition: transform 0.4s var(--easing-apple), box-shadow 0.4s var(--easing-apple), background 0.4s var(--easing-apple);
+            transform-style: preserve-3d;
+            will-change: transform;
+            overflow: hidden;
+        }
+
+        .card-glass::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1.2px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 107, 0, 0.5) 70%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .card-glass::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 180, 100, 0.18), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.4s var(--easing-apple);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card-glass:hover::after {
+            opacity: 1;
+        }
+
+        .card-glass:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 107, 0, 0.12) 100%);
+            box-shadow: 
+                inset 0 1.5px 0 0 rgba(255, 255, 255, 0.75),
+                inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.7),
+                0 30px 70px -10px rgba(255, 107, 0, 0.35);
+        }
+
+        .grid > .card-glass {
+            transform: perspective(1000px) rotateX(calc(var(--rx, 0) * 1deg)) rotateY(calc(var(--ry, 0) * 1deg)) translateZ(0);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s var(--easing-apple), background 0.4s var(--easing-apple);
+        }
+
+        .liquid-glass-btn {
+            position: relative;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+                0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s var(--easing-apple);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .liquid-glass-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 100%);
+            border-radius: 9999px 9999px 0 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .liquid-glass-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.35), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s var(--easing-apple);
+            pointer-events: none;
+        }
+
+        .liquid-glass-btn:hover::before {
+            opacity: 1;
+        }
+
+        .liquid-glass-btn:hover {
+            background: linear-gradient(180deg, rgba(255, 130, 30, 0.3) 0%, rgba(255, 80, 0, 0.15) 100%);
+            border-color: rgba(255, 180, 100, 0.65);
+            box-shadow: 
+                inset 0 1.5px 2px rgba(255, 255, 255, 0.7),
+                0 0 35px rgba(255, 107, 0, 0.45);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .liquid-glass-orange {
+            position: relative;
+            background: linear-gradient(135deg, #FFD700 0%, #FF6B00 50%, #C84400 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 235, 190, 0.6);
+            box-shadow: 
+                inset 0 2px 2px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -3px 6px 0 rgba(80, 20, 0, 0.6),
+                0 14px 40px rgba(255, 107, 0, 0.5);
+            transition: all 0.4s var(--easing-apple);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .liquid-glass-orange::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .liquid-glass-orange:hover {
+            background: linear-gradient(135deg, #FFE033 0%, #FF7A1A 50%, #E04B00 100%);
+            border-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                inset 0 2px 4px 0 rgba(255, 255, 255, 0.95),
+                inset 0 -3px 6px 0 rgba(80, 20, 0, 0.5),
+                0 0 50px rgba(255, 125, 0, 0.85);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .tab-btn.active-tab {
+            background: linear-gradient(135deg, rgba(255, 125, 15, 0.4) 0%, rgba(200, 60, 0, 0.3) 100%) !important;
+            border-color: rgba(255, 180, 100, 0.85) !important;
+            box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 0 35px rgba(255, 107, 0, 0.5) !important;
+            color: #FFFFFF !important;
+        }
+
+        .icon-jewel {
+            background: linear-gradient(135deg, rgba(255, 140, 40, 0.25) 0%, rgba(200, 50, 0, 0.12) 100%);
+            border: 1px solid rgba(255, 190, 110, 0.45);
+            box-shadow: 
+                inset 0 1.5px 2px rgba(255, 255, 255, 0.55),
+                inset 0 -1.5px 3px rgba(0, 0, 0, 0.5),
+                0 8px 20px rgba(255, 107, 0, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s var(--easing-apple);
+        }
+
+        .icon-jewel i {
+            text-shadow: 0 0 12px rgba(255, 140, 0, 0.8);
+        }
+
+        .card-glass:hover .icon-jewel {
+            transform: translateY(-3px) scale(1.08) rotate(-3deg);
+            border-color: rgba(255, 210, 140, 0.8);
+            box-shadow: 
+                inset 0 2px 3px rgba(255, 255, 255, 0.8),
+                0 12px 28px rgba(255, 107, 0, 0.5);
+        }
+
+        .glass-badge {
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.25) 0%, rgba(255, 168, 0, 0.1) 100%);
+            border: 1px solid rgba(255, 180, 100, 0.35);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070709; }
+        ::-webkit-scrollbar-thumb { background: #23232C; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B00; }
+    </style>
+</head>
+<body class="w-full relative min-h-screen flex flex-col justify-between">
+
+    <!-- Ambient Bokeh Particles & Glass Orbs -->
+    <div class="bokeh-container">
+        <div class="bokeh-ball w-96 h-96 bg-nexus-orange top-10 -left-20"></div>
+        <div class="bokeh-ball w-[30rem] h-[30rem] bg-nexus-amber top-1/3 -right-32" style="animation-delay: -5s;"></div>
+        <div class="bokeh-ball w-80 h-80 bg-nexus-darkOrange bottom-10 left-1/4" style="animation-delay: -9s;"></div>
+
+        <div class="glass-sphere w-48 h-48 top-1/4 left-10"></div>
+        <div class="glass-sphere w-64 h-64 top-2/3 right-12" style="animation-delay: -7s;"></div>
+        <div class="glass-sphere w-36 h-36 bottom-20 left-1/3" style="animation-delay: -14s;"></div>
+    </div>
+
+    <!-- Mouse Aura Follower Element -->
+    <div id="mouse-aura"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-4 z-50 w-[96%] mx-auto max-w-[1800px] relative">
+        <nav class="card-glass rounded-full px-6 py-4 flex items-center justify-between shadow-2xl">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                    <svg class="w-full h-full" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo">
+                      <defs>
+                        <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="520" y1="760" x2="1620" y2="1330">
+                          <stop offset="0" stop-color="#FF8A10"/>
+                          <stop offset="0.5" stop-color="#FF6A00"/>
+                          <stop offset="1" stop-color="#FF4A00"/>
+                        </linearGradient>
+                      </defs>
+                      <g fill="url(#g)" stroke="url(#g)" stroke-width="14" stroke-linejoin="round">
+                        <path d="M800 428 L997 428 L1008 440 L1008 868 L1118 742 L1550 742 L1660 888 L1548 1046 L1362 1046 L1342 1032 L1432 906 L1420 888 L1238 888 L1015 1190 L806 1192 L794 1180 L794 760 L465 1190 L275 1192 L262 1180 Z"/>
+                        <path d="M1345 428 L1530 428 L1540 442 L1370 684 L1178 684 L1166 670 Z"/>
+                        <path d="M770 1262 L955 1262 L968 1275 L912 1356 L926 1380 L1112 1380 L1238 1210 L1425 1210 L1436 1226 L1235 1516 L800 1516 L690 1362 Z"/>
+                      </g>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-lg tracking-tight text-white group-hover:text-nexus-orange transition-colors">
+                        NEXUSCORE
+                    </span>
+                    <span class="luxury-sub-text text-[10px] text-nexus-amber -mt-1">OPTIMIZER</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-2">
+                <button id="tab-btn-android" onclick="switchTab('android')" class="px-5 py-2.5 rounded-full text-sm font-medium text-white bg-white/10 active-tab transition-all">Android Optimizer</button>
+                <button id="tab-btn-windows" onclick="switchTab('windows')" class="px-5 py-2.5 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all">Windows Optimizer</button>
+                <button id="tab-btn-support" onclick="switchTab('support')" class="px-5 py-2.5 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all">Support</button>
+                <button onclick="togglePrivacyModal(true)" class="px-5 py-2.5 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all">Privacy Policy</button>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="#download" class="liquid-glass-btn px-6 py-2.5 rounded-full text-sm font-semibold text-white">
+                    Get Suite
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="w-full flex-grow px-4 md:px-10 lg:px-16 py-12 space-y-28 max-w-[1920px] mx-auto relative z-10">
+        
+        <!-- Interactive Platform Sections -->
+        <section id="features" class="w-full space-y-10 pt-6">
+
+            <!-- TAB 1: Android App Content -->
+            <div id="tab-content-android" class="space-y-12 transition-all duration-500">
+                <div class="text-center max-w-3xl mx-auto space-y-4 card-glass p-6 md:p-8 !border !border-orange-500/50 shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-nexus-orange to-transparent"></div>
+                    <div class="inline-block px-4 py-1.5 rounded-full glass-badge text-nexus-amber text-xs font-bold uppercase tracking-widest">
+                        Mobile Performance Suite
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-light text-white tracking-wide">
+                        NEXUSCORE <span class="luxury-sub-text orange-gradient-text text-2xl md:text-4xl block mt-1">OPTIMIZER FOR ANDROID</span>
+                    </h2>
+                    <p class="text-gray-400 text-base md:text-lg font-light">
+                        Real-time hardware telemetry control, ADB/Shizuku engine overrides, and specialized mobile gaming tools.
+                    </p>
+                </div>
+
+                <!-- Android Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Hardware Engine Controller</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Live dynamic telemetry monitor for CPU load, GPU rendering, RAM allocation, and thermal sensor metrics with customizable lock modes.
+                        </p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Floating Game Overlay (HUD)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            An unobtrusive, interactive floating pill widget displaying FPS status, CPU/GPU percentages, and battery thermals on top of any active game.
+                        </p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Display & 120Hz Peak Lock</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Forces hardware refresh rate up to 120Hz / 144Hz while locking VSync parameters for smooth frame delivery during gaming sessions.
+                        </p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Shizuku & ADB Shell Integration</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Executes privileged system tweaks seamlessly via Shizuku binder authorization without requiring traditional full device root.
+                        </p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-hand-pointer"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">System Tweaks & DPI Tool</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Customize touch delay down to 0ms ultra precision, modify display DPI presets, iPad view ratios, and animation scaling factors.
+                        </p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-14 h-14 rounded-2xl flex items-center justify-center text-nexus-orange text-2xl">
+                            <i class="fa-solid fa-wifi"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Ping Isolation & Net Boost</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Custom DNS controllers, TCP packet optimizations, and automatic Google background service disconnects during active gameplay.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Windows App Content -->
+            <div id="tab-content-windows" class="hidden space-y-12 transition-all duration-500">
+                <div class="text-center max-w-3xl mx-auto space-y-4 card-glass p-6 md:p-8 !border !border-orange-500/50 shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-nexus-orange to-transparent"></div>
+                    <div class="inline-block px-4 py-1.5 rounded-full glass-badge text-nexus-amber text-xs font-bold uppercase tracking-widest">
+                        Desktop Optimization Suite
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-light text-white tracking-wide">
+                        NEXUSCORE <span class="luxury-sub-text orange-gradient-text text-2xl md:text-4xl block mt-1">OPTIMIZER FOR WINDOWS</span>
+                    </h2>
+                    <p class="text-gray-400 text-base md:text-lg font-light">
+                        A powerful Windows operating system optimization suite engineered to strip bloatware, disable telemetry background services, reduce input lag, and maximize frame delivery on desktop PCs and laptops.
+                    </p>
+                </div>
+
+                <!-- Windows Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-memory"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">RAM & Cache Sweeper</h3>
+                        <p class="text-gray-400 text-sm">Automated standby list memory cleaning and kernel cache compaction to release wasted physical RAM.</p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Power Plan Governor</h3>
+                        <p class="text-gray-400 text-sm">Unlocks hidden Windows Ultimate Performance power profiles and locks CPU core states at maximum clock speeds.</p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Telemetry & Bloat Disabler</h3>
+                        <p class="text-gray-400 text-sm">Completely deactivates background diagnostic tracking, unnecessary service daemons, and pre-installed app bloatware.</p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Input Delay Reduction</h3>
+                        <p class="text-gray-400 text-sm">Tweaks system timer resolution, graphics driver interrupt priorities, and USB polling rates for instantaneous response.</p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Network Stack Tuning</h3>
+                        <p class="text-gray-400 text-sm">Adjusts TCP/IP parameters, Nagle's algorithm, and packet throttling to ensure minimal ping spikes in online games.</p>
+                    </div>
+
+                    <div class="card-glass p-8 space-y-3 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-solid fa-rotate"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">1-Click Restore Point</h3>
+                        <p class="text-gray-400 text-sm">Creates instant system backups before applying tweaks, giving you total peace of mind with instant 1-click restore capability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Support & Community Content -->
+            <div id="tab-content-support" class="hidden space-y-12 transition-all duration-500">
+                <div class="text-center max-w-3xl mx-auto space-y-4 card-glass p-6 md:p-8 !border !border-orange-500/50 shadow-[0_0_30px_rgba(255,107,0,0.2)]">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-nexus-orange to-transparent"></div>
+                    <div class="inline-block px-4 py-1.5 rounded-full glass-badge text-nexus-amber text-xs font-bold uppercase tracking-widest">
+                        Help & Community Hub
+                    </div>
+                    <h2 class="text-3xl md:text-5xl font-display font-light text-white tracking-wide">
+                        NEXUSCORE <span class="luxury-sub-text orange-gradient-text text-2xl md:text-4xl block mt-1">SUPPORT & COMMUNITY</span>
+                    </h2>
+                    <p class="text-gray-400 text-base md:text-lg font-light">
+                        Connect with developers and users, report issues, check source code updates, and join our active community channels.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                    <div class="card-glass p-6 text-center space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">GitHub</h4>
+                        <p class="text-gray-400 text-xs">Explore source code repositories, updates, and releases.</p>
+                        <a href="https://github.com/shpetimsefa14-bit" target="_blank" class="inline-block px-5 py-2 rounded-full liquid-glass-btn text-xs font-semibold text-white hover:text-nexus-orange transition-colors">
+                            Visit Profile <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="card-glass p-6 text-center space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-brands fa-discord"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">Discord Community</h4>
+                        <p class="text-gray-400 text-xs">Chat live with testers, get support, and share feedback.</p>
+                        <a href="https://discord.gg/eKdeX8bDpH" target="_blank" class="inline-block px-5 py-2 rounded-full liquid-glass-btn text-xs font-semibold text-white hover:text-nexus-orange transition-colors">
+                            Join Server <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="card-glass p-6 text-center space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">TikTok</h4>
+                        <p class="text-gray-400 text-xs">Watch optimization guides, FPS tests, and shorts.</p>
+                        <a href="https://www.tiktok.com/@nexsuscoreoptimisation" target="_blank" class="inline-block px-5 py-2 rounded-full liquid-glass-btn text-xs font-semibold text-white hover:text-nexus-orange transition-colors">
+                            Watch Videos <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="card-glass p-6 text-center space-y-4 reveal-on-scroll">
+                        <div class="icon-jewel w-12 h-12 rounded-2xl mx-auto flex items-center justify-center text-nexus-orange text-xl">
+                            <i class="fa-brands fa-youtube"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">YouTube</h4>
+                        <p class="text-gray-400 text-xs">In-depth setup tutorials and benchmark showcases.</p>
+                        <a href="https://www.youtube.com/@NexsusCoreOptimisation" target="_blank" class="inline-block px-5 py-2 rounded-full liquid-glass-btn text-xs font-semibold text-white hover:text-nexus-orange transition-colors">
+                            Subscribe <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Banner -->
+        <section id="download" class="w-full card-glass p-10 md:p-16 text-center space-y-8 reveal-on-scroll">
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white">
+                Ready to Experience <span class="orange-gradient-text">Peak Speed?</span>
+            </h2>
+            <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
+                Download the NexusCore Optimizer suite today and take full control over your device hardware.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://download1580.mediafire.com/esky58qdahqgxQhNKDt-L7trnDqOfUU7Hr9xBYGr_Cqh_DUjLkspDBiwEqb2iWQCSq9im0aNbxSFPBedcs0SN6oFYQ7D2GfSQZIAzfhswwBEx0DBG3NhijXNyR8_SXcwsp7ELVrhoKK0G_5QHyn9p4RO-fgfvrt5Ieymw_-_LGNxOmN7gg/xtxsccrxy4wg793/NexusCoreOptimizer.apk" download="NexusCoreOptimizer.apk" target="_blank" class="liquid-glass-orange px-8 py-4 rounded-full text-white font-bold text-base flex items-center justify-center no-underline cursor-pointer">
+                    <i class="fa-brands fa-android mr-2"></i> Download Android APK
+                </a>
+                <a href="https://download1583.mediafire.com/80135rrcx68gmxxap-u1Pl1WKUCBm1p2BtQzIlU4dhOnySlkTbn8W0NOLUoBWTZP34fVIRxEnLWNognVD-RbbKfl4OKSBAOxScACLCoO2264h5Hedfi3ibRPx3VJCIifKMyQZuRji9GliCEzZkses2DLed5klfqMGRPxGBRy1iPG0N0G-Q/cd9c5cdx6jtrrkk/NexusWindowsOptimizer.exe" download="NexusWindowsOptimizer.exe" target="_blank" class="liquid-glass-btn px-8 py-4 rounded-full text-white font-bold text-base flex items-center justify-center no-underline cursor-pointer">
+                    <i class="fa-brands fa-windows mr-2"></i> Download Windows App
+                </a>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Section Panel -->
+        <section id="privacy" class="w-full card-glass p-8 md:p-12 space-y-6 reveal-on-scroll">
+            <div class="flex items-center gap-3">
+                <div class="icon-jewel w-10 h-10 rounded-2xl flex items-center justify-center text-nexus-orange text-lg">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-display font-bold text-white">Privacy Policy & Zero-Knowledge Architecture</h3>
+            </div>
+            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                NexusCore Optimizer operates under a strict Zero-Knowledge privacy model. All optimization tweaks, hardware telemetry reads, and Shizuku/ADB shell commands run 100% locally on your device. We do not collect, store, or transmit any personal data, hardware identifiers, or usage logs to external servers.
+            </p>
+            <div class="flex items-center gap-4 pt-2">
+                <button onclick="togglePrivacyModal(true)" class="liquid-glass-btn px-6 py-2.5 rounded-full text-sm font-semibold text-white">
+                    Read Full Privacy Terms
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Privacy Policy Modal Overlay -->
+    <div id="privacy-modal" class="fixed inset-0 z-[10000] hidden flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="card-glass w-full max-w-3xl p-8 md:p-10 space-y-6 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="togglePrivacyModal(false)" class="absolute top-6 right-6 w-10 h-10 rounded-full liquid-glass-btn flex items-center justify-center text-gray-300 hover:text-white transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="text-2xl md:text-3xl font-display font-bold text-white flex items-center gap-3">
+                <i class="fa-solid fa-shield-halved text-nexus-orange"></i> Privacy Policy
+            </h3>
+            
+            <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4">
+                <h4 class="text-white font-bold text-lg">1. Zero Data Collection</h4>
+                <p>NexusCore Optimizer and NexusWindowsOptimizer process hardware telemetry (CPU, GPU, RAM, FPS) purely in local volatile memory. No user behavior or personal information is sent over the internet.</p>
+
+                <h4 class="text-white font-bold text-lg">2. Local System Permissions & ADB/Shizuku</h4>
+                <p>Permissions requested (such as Shizuku binder authorization or Display Over Other Apps) are strictly used to execute hardware tuning commands and overlay performance stats locally.</p>
+
+                <h4 class="text-white font-bold text-lg">3. Network & DNS Control</h4>
+                <p>Custom DNS and Ping Isolation routines operate locally on your network stack to improve routing latency. We do not inspect, log, or proxy your personal web traffic.</p>
+
+                <h4 class="text-white font-bold text-lg">4. Updates & Security</h4>
+                <p>Security patches and feature updates are delivered via direct official release channels without background telemetry trackers.</p>
+            </div>
+
+            <div class="pt-4 flex justify-end">
+                <button onclick="togglePrivacyModal(false)" class="liquid-glass-orange px-6 py-2.5 rounded-full text-sm font-bold text-white">
+                    I Understand & Accept
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 border-t border-nexus-cardBorder bg-[#070709] mt-16 relative z-10">
+        <div class="w-full text-center px-4 space-y-3">
+            <div class="flex justify-center gap-6 text-sm text-gray-400">
+                <button onclick="switchTab('support')" class="hover:text-nexus-orange transition-colors">Support</button>
+                <button onclick="togglePrivacyModal(true)" class="hover:text-nexus-orange transition-colors">Privacy Policy</button>
+                <button onclick="switchTab('android')" class="hover:text-nexus-orange transition-colors">Android Optimizer</button>
+                <button onclick="switchTab('windows')" class="hover:text-nexus-orange transition-colors">Windows Optimizer</button>
+            </div>
+            <p class="text-gray-400 text-sm font-medium tracking-wide">
+                &copy; 2026 NexusCore Optimizer - All rights reserved
+            </p>
+        </div>
+    </footer>
+
+    <!-- Script for immediate mouse tracking aura, 3D card tilt, specular spotlight & scroll reveal observer -->
+    <script>
+        const mouseAura = document.getElementById('mouse-aura');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let auraX = mouseX;
+        let auraY = mouseY;
+
+        window.addEventListener('pointermove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (e.target && typeof e.target.closest === 'function') {
+                const target = e.target.closest('.card-glass, .liquid-glass-btn, .liquid-glass-orange');
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    const x = mouseX - rect.left;
+                    const y = mouseY - rect.top;
+                    target.style.setProperty('--mx', `${x}px`);
+                    target.style.setProperty('--my', `${y}px`);
+
+                    if (target.parentElement && target.parentElement.classList.contains('grid')) {
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = -((y - centerY) / centerY) * 8;
+                        const rotateY = ((x - centerX) / centerX) * 8;
+                        target.style.setProperty('--rx', rotateX);
+                        target.style.setProperty('--ry', rotateY);
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('pointerleave', (e) => {
+            if (e.target && typeof e.target.closest === 'function') {
+                const target = e.target.closest('.card-glass');
+                if (target) {
+                    target.style.setProperty('--rx', 0);
+                    target.style.setProperty('--ry', 0);
+                }
+            }
+        }, true);
+
+        function updateAura() {
+            auraX += (mouseX - auraX) * 0.12;
+            auraY += (mouseY - auraY) * 0.12;
+            mouseAura.style.transform = `translate3d(${auraX}px, ${auraY}px, 0)`;
+            requestAnimationFrame(updateAura);
+        }
+        updateAura();
+
+        function observeElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+        });
+
+        function switchTab(platform) {
+            const tabAndroid = document.getElementById('tab-content-android');
+            const tabWindows = document.getElementById('tab-content-windows');
+            const tabSupport = document.getElementById('tab-content-support');
+            
+            const btnAndroid = document.getElementById('tab-btn-android');
+            const btnWindows = document.getElementById('tab-btn-windows');
+            const btnSupport = document.getElementById('tab-btn-support');
+
+            if (tabAndroid) tabAndroid.classList.add('hidden');
+            if (tabWindows) tabWindows.classList.add('hidden');
+            if (tabSupport) tabSupport.classList.add('hidden');
+
+            [btnAndroid, btnWindows, btnSupport].forEach(btn => {
+                if (btn) {
+                    btn.classList.remove('active-tab');
+                    btn.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-white/10');
+                    btn.classList.remove('text-white', 'bg-white/10');
+                }
+            });
+
+            if (platform === 'android') {
+                if (tabAndroid) tabAndroid.classList.remove('hidden');
+                if (btnAndroid) { 
+                    btnAndroid.classList.add('active-tab', 'text-white', 'bg-white/10'); 
+                    btnAndroid.classList.remove('text-gray-300', 'hover:bg-white/10'); 
+                }
+            } else if (platform === 'windows') {
+                if (tabWindows) tabWindows.classList.remove('hidden');
+                if (btnWindows) { 
+                    btnWindows.classList.add('active-tab', 'text-white', 'bg-white/10'); 
+                    btnWindows.classList.remove('text-gray-300', 'hover:bg-white/10'); 
+                }
+            } else if (platform === 'support') {
+                if (tabSupport) tabSupport.classList.remove('hidden');
+                if (btnSupport) { 
+                    btnSupport.classList.add('active-tab', 'text-white', 'bg-white/10'); 
+                    btnSupport.classList.remove('text-gray-300', 'hover:bg-white/10'); 
+                }
+            }
+
+            observeElements();
+            const featuresSection = document.getElementById('features');
+            if (featuresSection) {
+                featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function togglePrivacyModal(show) {
+            const modal = document.getElementById('privacy-modal');
+            if (modal) {
+                if (show) {
+                    modal.classList.remove('hidden');
+                } else {
+                    modal.classList.add('hidden');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
