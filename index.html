@@ -101,15 +101,57 @@
                 <button onclick="openPrivacyModal()" class="hover:text-white transition text-left" data-i18n="navPrivacy">Privacy Policy</button>
             </nav>
 
-            <!-- Right Side: Language Selector & CTA Button -->
+            <!-- Right Side: Social Icons, Language Selector & CTA Button -->
             <div class="flex items-center space-x-4">
+                <!-- Social Icons in Top Navbar -->
+                <div class="hidden lg:flex items-center space-x-3 text-slate-400">
+                    <a href="https://discord.gg/eKdeX8bDpH" target="_blank" class="hover:text-purple-400 transition" title="Discord">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    </a>
+                    <a href="https://github.com/shpetimsefa14-bit/" target="_blank" class="hover:text-purple-400 transition" title="GitHub">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@NexsusCoreOptimisation" target="_blank" class="hover:text-purple-400 transition" title="YouTube">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@nexsuscoreoptimisation" target="_blank" class="hover:text-purple-400 transition" title="TikTok">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    </a>
+                </div>
+
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-[#12121a]/80 border border-white/10 text-slate-200 text-xs rounded-full px-3 py-2 outline-none focus:border-purple-500 cursor-pointer backdrop-blur-md">
                     <option value="sq">SQ</option>
                     <option value="en" selected>EN</option>
                     <option value="de">DE</option>
                     <option value="es">ES</option>
                 </select>
-                <a href="#products" class="hidden sm:inline-flex items-center justify-center bg-white text-[#050507] hover:bg-slate-200 font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]" data-i18n="downloadBtn">
+
+                <!-- Auth Section: Google Login Button OR Logged-in User Profile -->
+                <div id="authContainer" class="flex items-center">
+                    <button id="googleLoginBtn" onclick="loginWithGoogle()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium px-4 py-2 rounded-full text-xs sm:text-sm transition-all backdrop-blur-md">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+                            <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                        </svg>
+                        <span>Logohu me Google</span>
+                    </button>
+
+                    <!-- User Profile Pill (Shown when logged in) -->
+                    <div id="userProfile" class="hidden flex items-center gap-2.5 bg-[#12121a]/90 border border-purple-500/30 rounded-full pl-1.5 pr-3 py-1 backdrop-blur-md">
+                        <img id="userAvatar" src="" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-purple-400/50">
+                        <div class="hidden sm:flex flex-col text-left leading-tight">
+                            <span id="userName" class="text-xs font-semibold text-white truncate max-w-[110px]"></span>
+                            <span id="userEmail" class="text-[10px] text-slate-400 truncate max-w-[110px]"></span>
+                        </div>
+                        <button onclick="logoutUser()" class="ml-1 text-[11px] font-semibold text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-full transition" title="Logout">
+                            Dil
+                        </button>
+                    </div>
+                </div>
+
+                <a href="#products" onclick="handleProtectedDownload(event, 'NexusCore Suite')" class="hidden sm:inline-flex items-center justify-center bg-white text-[#050507] hover:bg-slate-200 font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]" data-i18n="downloadBtn">
                     Download Now
                 </a>
             </div>
@@ -124,7 +166,7 @@
         </h1>
 
         <!-- Subtitle -->
-        <p id="hero-subtitle" class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-16 min-h-[80px] glass-text-effect opacity-90 relative z-20">
+        <p id="hero-subtitle" class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-16 min-h-[80px] glass-text-effect opacity-90 relative z-20 text-center px-4">
             <!-- Typing effect rendered here -->
         </p>
 
@@ -167,7 +209,7 @@
                 </div>
 
                 <!-- Primary Action Button -->
-                <a id="platform-action" href="#download" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-medium px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-[0_10px_25px_rgba(124,58,237,0.3)]">
+                <a id="platform-action" href="#download" onclick="handleProtectedDownload(event, document.getElementById('platform-title').innerText)" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-medium px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-[0_10px_25px_rgba(124,58,237,0.3)]">
                     Download .EXE
                 </a>
             </div>
@@ -206,7 +248,7 @@
                 <div class="flex flex-wrap gap-2">
                     <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Shizuku UID 2000</span>
                     <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Touch Sensitivity</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Android 14–17</span>
+                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Android 11+</span>
                 </div>
             </div>
 
@@ -295,7 +337,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#download" class="w-full inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl text-sm transition" data-i18n="downloadFree">Download Free</a>
+                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore Standard Free')" class="w-full inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl text-sm transition" data-i18n="downloadFree">Download Free</a>
             </div>
 
             <!-- VIP Plan -->
@@ -324,7 +366,7 @@
                         </li>
                     </ul>
                 </div>
-                <a href="#download" class="w-full inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-purple-500/25" data-i18n="getVip">Get VIP Now</a>
+                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore VIP Pro')" class="w-full inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-purple-500/25" data-i18n="getVip">Get VIP Now</a>
             </div>
         </div>
     </section>
@@ -410,7 +452,7 @@
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
                 <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
-                    <p data-i18n="a7">We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates (Android 14 through 17), and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.</p>
+                    <p data-i18n="a7">We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates, and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.</p>
                 </div>
             </div>
 
@@ -445,9 +487,24 @@
                     <path fill="url(#ncGradFooter)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
                 </svg>
             </div>
+            
+            <!-- Social Media Icons in Footer -->
+            <div class="flex items-center space-x-5 text-slate-400">
+                <a href="https://discord.gg/eKdeX8bDpH" target="_blank" class="hover:text-purple-400 transition" title="Discord">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </a>
+                <a href="https://github.com/shpetimsefa14-bit/" target="_blank" class="hover:text-purple-400 transition" title="GitHub">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@NexsusCoreOptimisation" target="_blank" class="hover:text-purple-400 transition" title="YouTube">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@nexsuscoreoptimisation" target="_blank" class="hover:text-purple-400 transition" title="TikTok">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+            </div>
+
             <div class="flex items-center space-x-6 text-sm">
-                <a href="https://github.com" target="_blank" class="hover:text-white transition" data-i18n="github">GitHub</a>
-                <a href="https://discord.com" target="_blank" class="hover:text-white transition" data-i18n="discord">Discord</a>
                 <button onclick="openPrivacyModal()" class="hover:text-white transition" data-i18n="privacyPolicyFooter">Privacy Policy</button>
                 <a href="#" class="hover:text-white transition" data-i18n="terms">Terms</a>
             </div>
@@ -537,6 +594,111 @@
         </div>
     </div>
 
+    <!-- ================= AUTH REQUIRED PROMPT MODAL ================= -->
+    <div id="authPromptModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="liquid-glass rounded-3xl max-w-md w-full p-6 sm:p-8 text-center relative border border-purple-500/30">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">✕</button>
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2 font-brand">Kërkohet Logimi</h3>
+            <p id="authPromptReason" class="text-slate-300 text-sm mb-6 leading-relaxed">
+                Ju lutemi logohuni me llogarinë tuaj Google për të shkarkuar skedarët ose për të biseduar me NexusCore AI.
+            </p>
+            <button onclick="loginWithGoogle()" class="w-full inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-[#050507] font-semibold py-3 px-5 rounded-xl text-sm transition shadow-lg">
+                <svg class="w-5 h-5" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                    <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+                    <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+                </svg>
+                <span>Vazhdo me Google</span>
+            </button>
+            <p id="authErrorText" class="text-red-400 text-xs mt-3 hidden"></p>
+        </div>
+    </div>
+
+    <!-- ================= TOAST NOTIFICATION ================= -->
+    <div id="toastNotice" class="fixed top-24 right-6 z-[70] liquid-glass border border-purple-500/40 text-white text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-2xl hidden transition-all"></div>
+
+    <!-- ================= COOKIE & PRIVACY CONSENT BANNER ================= -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 bg-[#0a0a10]/95 backdrop-blur-xl border-t border-white/10 shadow-2xl transition-transform duration-500">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-slate-300 text-xs sm:text-sm text-center md:text-left leading-relaxed">
+                We use cookies and similar technologies to enhance your experience, analyze site traffic, and ensure secure system diagnostics. By clicking <strong class="text-white">"Accept All"</strong>, you consent to our use of cookies and <button onclick="openPrivacyModal()" class="text-purple-400 underline hover:text-purple-300">Privacy Policy</button>.
+            </p>
+            <div class="flex items-center space-x-3 shrink-0">
+                <button onclick="rejectCookies()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition">
+                    Reject All
+                </button>
+                <button onclick="acceptCookies()" class="bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-purple-500/25">
+                    Accept All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= DRAGGABLE FLOATING AI WIDGET (GEMINI API) ================= -->
+    <div id="aiWidgetContainer" class="fixed z-50 select-none" style="right: 32px; bottom: 100px; touch-action: none;">
+        <!-- Circular Floating Button with NexusCore Logo -->
+        <div id="aiToggleBtn" onclick="toggleAIChat()" class="w-14 h-14 rounded-full bg-[#12121a]/90 backdrop-blur-xl text-white flex items-center justify-center shadow-[0_0_25px_rgba(124,58,237,0.4)] cursor-pointer hover:scale-105 transition-transform border border-white/15 relative group p-3">
+            <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                <defs>
+                    <linearGradient id="ncGradFloat" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#22d3ee"/>
+                        <stop offset="35%" stop-color="#3b82f6"/>
+                        <stop offset="65%" stop-color="#a855f7"/>
+                        <stop offset="100%" stop-color="#4c1d95"/>
+                    </linearGradient>
+                </defs>
+                <path fill="url(#ncGradFloat)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
+                <path fill="url(#ncGradFloat)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
+                <path fill="url(#ncGradFloat)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
+            </svg>
+        </div>
+
+        <!-- Chat Window (Initially Hidden) -->
+        <div id="aiChatWindow" class="liquid-glass rounded-3xl w-[340px] sm:w-[380px] h-[480px] flex flex-col shadow-2xl border border-white/15 overflow-hidden hidden absolute bottom-0 right-0">
+            <!-- Chat Header -->
+            <div class="p-4 bg-[#12121a]/90 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-4 w-auto">
+                        <defs>
+                            <linearGradient id="ncGradChat" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#22d3ee"/>
+                                <stop offset="35%" stop-color="#3b82f6"/>
+                                <stop offset="65%" stop-color="#a855f7"/>
+                                <stop offset="100%" stop-color="#4c1d95"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#ncGradChat)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
+                        <path fill="url(#ncGradChat)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
+                        <path fill="url(#ncGradChat)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
+                    </svg>
+                    <span class="font-bold text-white text-sm">NexusCore Gemini AI</span>
+                </div>
+                <button onclick="toggleAIChat()" class="text-slate-400 hover:text-white font-bold text-lg px-2">✕</button>
+            </div>
+
+            <!-- Chat Messages Body (Selectable text + Copy buttons) -->
+            <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs sm:text-sm text-slate-200 select-text">
+                <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] leading-relaxed relative group">
+                    <div class="msg-text">Hello! I am your NexusCore Gemini Assistant powered by AI. How can I help you optimize your system or troubleshoot hardware today?</div>
+                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-purple-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy">
+                        <span>Copy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Input Footer -->
+            <div class="p-3 bg-[#12121a]/90 border-t border-white/10 flex items-center space-x-2">
+                <input id="chatInput" type="text" onkeydown="handleChatKeyDown(event)" placeholder="Ask Gemini AI..." class="flex-1 bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-purple-500">
+                <button onclick="sendGeminiMessage()" class="bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold px-4 py-2 rounded-xl text-xs transition">Send</button>
+            </div>
+            <div class="text-[10px] text-center text-slate-500 pb-2">Pyt Gemini</div>
+        </div>
+    </div>
+
     <!-- ================= JAVASCRIPT LOGIC & LOCALIZATION ================= -->
     <script>
         // ================= INTERACTIVE MOUSE-REACTIVE DOT CANVAS =================
@@ -581,7 +743,6 @@
                         let force = (1 - dist / maxDist);
                         let angle = Math.atan2(dy, dx);
                         
-                        // Gravitational sink / repulsion effect pushing dots away from cursor
                         let shiftX = x - Math.cos(angle) * force * 24;
                         let shiftY = y - Math.sin(angle) * force * 24;
 
@@ -605,7 +766,7 @@
         }
         drawDots();
 
-        // ================= PRIVACY MODAL LOGIC =================
+        // ================= PRIVACY MODAL & COOKIE BANNER =================
         function openPrivacyModal() {
             document.getElementById('privacyModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -614,6 +775,276 @@
         function closePrivacyModal() {
             document.getElementById('privacyModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
+        }
+
+        function acceptCookies() {
+            const banner = document.getElementById('cookieBanner');
+            banner.style.transform = 'translateY(150%)';
+            setTimeout(() => banner.remove(), 500);
+        }
+
+        function rejectCookies() {
+            const banner = document.getElementById('cookieBanner');
+            banner.style.transform = 'translateY(150%)';
+            setTimeout(() => banner.remove(), 500);
+        }
+
+        // ================= DRAGGABLE FLOATING AI WIDGET LOGIC =================
+        const widget = document.getElementById('aiWidgetContainer');
+        const toggleBtn = document.getElementById('aiToggleBtn');
+        const chatWindow = document.getElementById('aiChatWindow');
+        let isChatOpen = false;
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        toggleBtn.addEventListener('mousedown', (e) => {
+            if (isChatOpen) return; // Don't drag when chat is open
+            isDragging = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            const rect = widget.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+
+            // Switch to fixed left/top positioning relative to viewport
+            widget.style.right = 'auto';
+            widget.style.bottom = 'auto';
+            widget.style.left = initialLeft + 'px';
+            widget.style.top = initialTop + 'px';
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        // Touch support for dragging
+        toggleBtn.addEventListener('touchstart', (e) => {
+            if (isChatOpen) return;
+            isDragging = false;
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+            const rect = widget.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+
+            widget.style.right = 'auto';
+            widget.style.bottom = 'auto';
+            widget.style.left = initialLeft + 'px';
+            widget.style.top = initialTop + 'px';
+
+            document.addEventListener('touchmove', onTouchMove);
+            document.addEventListener('touchend', onTouchEnd);
+        });
+
+        function onMouseMove(e) {
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                isDragging = true;
+            }
+            if (isDragging) {
+                let newLeft = initialLeft + dx;
+                let newTop = initialTop + dy;
+                
+                // Keep within screen bounds
+                newLeft = Math.max(10, Math.min(window.innerWidth - 70, newLeft));
+                newTop = Math.max(80, Math.min(window.innerHeight - 70, newTop));
+
+                widget.style.left = newLeft + 'px';
+                widget.style.top = newTop + 'px';
+            }
+        }
+
+        function onMouseUp() {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        }
+
+        function onTouchMove(e) {
+            const touch = e.touches[0];
+            const dx = touch.clientX - startX;
+            const dy = touch.clientY - startY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                isDragging = true;
+            }
+            if (isDragging) {
+                let newLeft = initialLeft + dx;
+                let newTop = initialTop + dy;
+
+                newLeft = Math.max(10, Math.min(window.innerWidth - 70, newLeft));
+                newTop = Math.max(80, Math.min(window.innerHeight - 70, newTop));
+
+                widget.style.left = newLeft + 'px';
+                widget.style.top = newTop + 'px';
+            }
+        }
+
+        function onTouchEnd() {
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+        }
+
+        function toggleAIChat() {
+            if (isDragging) return; // Prevent opening if it was a drag
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                toggleBtn.classList.add('hidden');
+                chatWindow.classList.remove('hidden');
+            } else {
+                toggleBtn.classList.remove('hidden');
+                chatWindow.classList.add('hidden');
+            }
+        }
+
+        // ================= GEMINI API CHAT INTEGRATION =================
+        const GEMINI_API_KEY = "AQ.Ab8RN6IG2C3B7av0WLiNN6VUUdCrgd5BFbSNTqZsygtTVdsUjQ";
+        let chatHistory = [];
+
+        function handleChatKeyDown(e) {
+            if (e.key === 'Enter') {
+                sendGeminiMessage();
+            }
+        }
+
+        async function sendGeminiMessage() {
+            const inputEl = document.getElementById('chatInput');
+            const messagesContainer = document.getElementById('chatMessages');
+            const prompt = inputEl.value.trim();
+
+            if (!prompt) return;
+
+            // Require Google Sign-In before asking AI
+            if (!window.currentUser) {
+                window.pendingAction = () => sendGeminiMessage();
+                openAuthModal("Ju lutemi logohuni me llogarinë tuaj Google për t'i bërë pyetje NexusCore Gemini AI.");
+                return;
+            }
+
+            // Append user message to UI with Copy button
+            messagesContainer.innerHTML += `
+                <div class="bg-white/10 rounded-2xl p-3 max-w-[85%] ml-auto leading-relaxed text-right">
+                    <div class="msg-text text-left">${escapeHtml(prompt)}</div>
+                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-black/30 hover:bg-black/50 px-2 py-0.5 rounded transition" title="Copy">
+                        <span>Copy</span>
+                    </button>
+                </div>
+            `;
+            inputEl.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Add user prompt to conversation history
+            chatHistory.push({
+                role: "user",
+                parts: [{ text: prompt }]
+            });
+
+            // Append loading indicator
+            const loadingId = 'loading-' + Date.now();
+            messagesContainer.innerHTML += `
+                <div id="${loadingId}" class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] text-purple-300 animate-pulse">
+                    Gemini is thinking...
+                </div>
+            `;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            try {
+                // Use gemini-3-flash-preview with system instructions and conversation history
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${GEMINI_API_KEY}`;
+                
+                const payload = {
+                    contents: chatHistory,
+                    systemInstruction: {
+                        parts: [{
+                            text: "You are NexusCore AI, an advanced system optimization, Windows/Android (Shizuku) tuning, and hardware engineering expert. Answer the user's questions clearly, accurately, and in the same language they use (Albanian, English, German, or Spanish)."
+                        }]
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) loadingEl.remove();
+
+                if (!response.ok) {
+                    const errorMsg = data?.error?.message || `HTTP Error ${response.status}`;
+                    messagesContainer.innerHTML += `
+                        <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-3 max-w-[85%] text-red-300 text-xs">
+                            <strong>API Error:</strong> ${escapeHtml(errorMsg)}
+                        </div>
+                    `;
+                    chatHistory.pop(); // Remove failed message from history
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    return;
+                }
+
+                const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (reply) {
+                    chatHistory.push({
+                        role: "model",
+                        parts: [{ text: reply }]
+                    });
+
+                    messagesContainer.innerHTML += `
+                        <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] leading-relaxed">
+                            <div class="msg-text whitespace-pre-line">${escapeHtml(reply)}</div>
+                            <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-purple-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy">
+                                <span>Copy</span>
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    messagesContainer.innerHTML += `
+                        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-3 max-w-[85%] text-yellow-300">
+                            No response generated. Please try rephrasing your question.
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) loadingEl.remove();
+                chatHistory.pop();
+                messagesContainer.innerHTML += `
+                    <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-3 max-w-[85%] text-red-300">
+                        Network error connecting to Gemini API.
+                    </div>
+                `;
+            }
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function copyMessageText(button) {
+            const msgDiv = button.parentElement.querySelector('.msg-text');
+            if (!msgDiv) return;
+            const textToCopy = msgDiv.innerText;
+
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const span = button.querySelector('span');
+                const originalText = span.innerText;
+                span.innerText = 'Copied!';
+                setTimeout(() => {
+                    span.innerText = originalText;
+                }, 1500);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textarea);
         }
 
         // ================= TRANSLATIONS DICTIONARY =================
@@ -672,11 +1103,9 @@
                 q6: "Can NexusCore cause instability or break my system?",
                 a6: "No. Every tweak, registry modification, and shell command executed by NexusCore undergoes extensive testing across various hardware configurations. Furthermore, automated Windows System Restore points are generated before any deep optimization is applied, allowing instant one-click rollback if desired.",
                 q7: "How often are updates released for the optimizer?",
-                a7: "We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates (Android 14 through 17), and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.",
+                a7: "We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates, and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.",
                 q8: "Is my personal data or telemetry collected?",
                 a8: "Never. NexusCore operates under a strict zero-telemetry and zero-logging policy. We do not track personal files, browsing activity, passwords, or credentials. All diagnostics run locally on your machine.",
-                github: "GitHub",
-                discord: "Discord",
                 privacyPolicyFooter: "Privacy Policy",
                 terms: "Terms",
                 copyright: "© 2026 NexusCore Optimizer. All rights reserved."
@@ -738,8 +1167,6 @@
                 a7: "Ne lëshojmë përditësime dy-javore dhe mujore për t'u përshtatur me patch-et e sigurisë së Windows, Android dhe driver-ët grafikë të Nvidia, AMD dhe Intel.",
                 q8: "A mblidhen të dhënat e mia personale ose telemetria?",
                 a8: "Asnjëherë. NexusCore funksionon me një politikë të rreptë pa telemetri. Ne nuk gjurmojmë skedarë personalë, fjalëkalime apo kredenciale.",
-                github: "GitHub",
-                discord: "Discord",
                 privacyPolicyFooter: "Politika e Privatësisë",
                 terms: "Kushtet",
                 copyright: "© 2026 NexusCore Optimizer. Të gjitha të drejtat e rezervuara."
@@ -786,23 +1213,21 @@
                 faqTitle: "Häufig gestellte Fragen",
                 faqSubtitle: "Klare Antworten auf häufige Fragen zu NexusCore.",
                 q1: "Was ist NexusCore Optimizer und wie funktioniert er?",
-                a1: "NexusCore ist eine fortschrittliche Engineering-Plattform, die System-Bloat entfernt, den RAM optimiert und CPU/GPU-Ressourcen freigibt. Durch das Bereinigen von Hintergrund-Caches und das Anpassen von Interrupt-Prioritäten wird maximale Leistung erzielt.",
+                a1: "NexusCore ist eine fortschrittliche Engineering-Plattform, die System-Bloat entfernt, den RAM optimiert und CPU/GPU-Ressourcen freigibt.",
                 q2: "Benötigt die Android-Version Root und ist Shizuku sicher?",
-                a2: "Kein Root erforderlich! Es verwendet die offizielle Shizuku API (UID 2000) über kabelloses Debugging zur sicheren Ausführung von Shell-Befehlen, ohne die Gerätesicherheit zu gefährden.",
+                a2: "Kein Root erforderlich! Es verwendet die offizielle Shizuku API (UID 2000) über kabelloses Debugging zur sicheren Ausführung von Shell-Befehlen.",
                 q3: "Was macht die Custom Windows 11 ISO schneller?",
-                a3: "Unsere benutzerdefinierte ISO entfernt Cortana, OneDrive, Xbox-Dienste und Telemetrie. Dies reduziert inaktive Hintergrundprozesse von über 120 auf makellose 30–35.",
+                a3: "Unsere benutzerdefinierte ISO entfernt Cortana, OneDrive, Xbox-Dienste und Telemetrie (30–35 Prozesse).",
                 q4: "Wie funktioniert der PowerShell- und Batch-Skriptgenerator?",
-                a4: "Unser intelligenter Analysator scannt CPU-Threads und GPU-Architektur und kompiliert automatisch optimierte Skripte zur Anpassung von Registry und Energieplänen.",
+                a4: "Unser intelligenter Analysator scannt CPU-Threads und GPU-Architektur und kompiliert automatisch optimierte Skripte.",
                 q5: "Was ist im VIP-Paket enthalten und wie wird es aktiviert?",
-                a5: "Das VIP-Paket enthält uneingeschränkten Zugriff auf ISO-Downloads, unbegrenzte KI-Skripte und 24/7-Support. Die Aktivierung erfolgt sofort nach dem Checkout.",
+                a5: "Das VIP-Paket enthält uneingeschränkten Zugriff auf ISO-Downloads, unbegrenzte KI-Skripte und 24/7-Support.",
                 q6: "Kann NexusCore Instabilität verursachen?",
-                a6: "Nein. Jede Änderung wird rigoros getestet. Vor tiefen Optimierungen werden automatisch Windows-Wiederherstellungspunkte erstellt.",
+                a6: "Nein. Jede Änderung wird rigoros getestet und es werden automatisch Windows-Wiederherstellungspunkte erstellt.",
                 q7: "Wie oft werden Updates veröffentlicht?",
                 a7: "Wir veröffentlichen zweiwöchentliche und monatliche Updates passend zu Windows-Sicherheitspatches und GPU-Treibern.",
                 q8: "Werden persönliche Daten oder Telemetriedaten gesammelt?",
-                a8: "Niemals. NexusCore arbeitet mit einer strikten Zero-Telemetrie-Richtlinie. Es werden keine persönlichen Dateien oder Anmeldeinformationen verfolgt.",
-                github: "GitHub",
-                discord: "Discord",
+                a8: "Niemals. NexusCore arbeitet mit einer strikten Zero-Telemetrie-Richtlinie.",
                 privacyPolicyFooter: "Datenschutz",
                 terms: "AGB",
                 copyright: "© 2026 NexusCore Optimizer. Alle Rechte vorbehalten."
@@ -849,23 +1274,21 @@
                 faqTitle: "Preguntas Frecuentes",
                 faqSubtitle: "Respuestas claras a preguntas comunes sobre NexusCore.",
                 q1: "¿Qué es NexusCore Optimizer y cómo funciona?",
-                a1: "NexusCore es una plataforma de ingeniería avanzada que elimina el bloatware, optimiza la RAM y libera recursos de CPU/GPU. Funciona purgando la caché inactiva, desactivando servicios de telemetría y ejecutando optimizaciones de kernel.",
+                a1: "NexusCore es una plataforma de ingeniería avanzada que elimina el bloatware, optimiza la RAM y libera recursos de CPU/GPU.",
                 q2: "¿La versión de Android requiere Root y es seguro Shizuku?",
-                a2: "¡No requiere Root! Utiliza la API oficial de Shizuku (UID 2000) mediante depuración inalámbrica para ejecutar comandos de forma segura sin comprometer la seguridad del dispositivo.",
+                a2: "¡No requiere Root! Utiliza la API oficial de Shizuku (UID 2000) mediante depuración inalámbrica.",
                 q3: "¿Qué hace que la ISO Custom de Windows 11 sea más rápida?",
-                a3: "Nuestra ISO personalizada elimina Cortana, OneDrive, servicios de Xbox y telemetría, reduciendo los procesos en segundo plano de 120+ a unos limpios 30–35.",
+                a3: "Nuestra ISO personalizada elimina Cortana, OneDrive y telemetría (30–35 procesos).",
                 q4: "¿Cómo funciona el generador de scripts PowerShell y Batch?",
-                a4: "Nuestro analizador inteligente escanea los hilos de tu CPU y arquitectura de GPU para compilar automáticamente scripts de optimización adaptados a tu equipo.",
+                a4: "Nuestro analizador inteligente escanea los hilos de tu CPU y arquitectura de GPU.",
                 q5: "¿Qué se incluye en el paquete VIP y cómo se activa?",
-                a5: "El paquete VIP incluye acceso total a descargas ISO personalizadas, generación ilimitada de scripts por IA y soporte técnico 24/7 activado al instante.",
+                a5: "El paquete VIP incluye acceso total a descargas ISO personalizadas y soporte técnico 24/7.",
                 q6: "¿Puede NexusCore causar inestabilidad en el sistema?",
-                a6: "No. Cada ajuste y script se prueba rigurosamente. Se generan puntos de restauración automática de Windows antes de aplicar optimizaciones profundas.",
+                a6: "No. Cada ajuste se prueba rigurosamente y se generan puntos de restauración automática.",
                 q7: "¿Con qué frecuencia se lanzan actualizaciones?",
-                a7: "Lanzamos actualizaciones quincenales y mensuales alineadas con los parches de seguridad de Windows y controladores de gráficos de Nvidia, AMD e Intel.",
+                a7: "Lanzamos actualizaciones quincenales y mensuales alineadas con los parches de seguridad.",
                 q8: "¿Se recopilan datos personales o telemetría?",
-                a8: "Nunca. NexusCore opera con una política estricta de cero telemetría y cero registros. No rastreamos archivos personales ni credenciales.",
-                github: "GitHub",
-                discord: "Discord",
+                a8: "Nunca. NexusCore opera con una política estricta de cero telemetría.",
                 privacyPolicyFooter: "Política de Privacidad",
                 terms: "Términos",
                 copyright: "© 2026 NexusCore Optimizer. Todos los derechos reservados."
@@ -948,7 +1371,7 @@
                 descEn: "Safe execution of privileged shell commands using Shizuku API (UID 2000) without unlocking bootloader or rooting.",
                 descDe: "Sichere Ausführung privilegierter Shell-Befehle über Shizuku API (UID 2000) ohne Root oder Bootloader-Entsperrung.",
                 descEs: "Ejecución segura de comandos mediante Shizuku API (UID 2000) sin desbloquear el bootloader ni root.",
-                tags: ["Shizuku UID 2000", "Touch Sensitivity", "Android 14–17"],
+                tags: ["Shizuku UID 2000", "Touch Sensitivity", "Android 11+"],
                 actionText: { sq: "Shkarko .APK", en: "Download .APK", de: ".APK herunterladen", es: "Descargar .APK" },
                 actionLink: "#download-android"
             },
@@ -1033,6 +1456,168 @@
         window.onload = function() {
             changeLanguage('en');
         };
+    </script>
+
+    <!-- ================= FIREBASE AUTHENTICATION (MODULAR SDK v11) ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            GoogleAuthProvider, 
+            signInWithPopup, 
+            signInWithRedirect, 
+            getRedirectResult, 
+            signOut, 
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB122cLsgRooHhkkjBH--z20PANf9kvqOU",
+            authDomain: "nexuscoreoptimizer-7fe3b.firebaseapp.com",
+            projectId: "nexuscoreoptimizer-7fe3b",
+            storageBucket: "nexuscoreoptimizer-7fe3b.firebasestorage.app",
+            messagingSenderId: "243650303939",
+            appId: "1:243650303939:web:649cfb4676f287fdd78f76"
+        };
+
+        // Initialize Firebase App and Auth
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
+
+        window.currentUser = null;
+        window.pendingAction = null;
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotice');
+            if (!toast) return;
+            toast.innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 4500);
+        }
+
+        window.openAuthModal = function(reasonText) {
+            const modal = document.getElementById('authPromptModal');
+            const reasonEl = document.getElementById('authPromptReason');
+            const errEl = document.getElementById('authErrorText');
+            if (reasonText && reasonEl) reasonEl.innerText = reasonText;
+            if (errEl) errEl.classList.add('hidden');
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeAuthModal = function() {
+            const modal = document.getElementById('authPromptModal');
+            if (modal) modal.classList.add('hidden');
+            window.pendingAction = null;
+        };
+
+        // Handle redirect result if user returns from Google Redirect Sign-In
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result && result.user) {
+                    showToast(`Mirësevini, ${result.user.displayName || result.user.email}!`);
+                }
+            })
+            .catch((error) => {
+                if (error && error.code !== 'auth/popup-blocked') {
+                    console.warn("Redirect Auth Info:", error.code);
+                }
+            });
+
+        // Sign in with Google (Popup with automatic fallback handling for blocked popups/iframes)
+        window.loginWithGoogle = async function() {
+            const errEl = document.getElementById('authErrorText');
+            if (errEl) errEl.classList.add('hidden');
+
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                closeAuthModal();
+                showToast(`Mirësevini, ${user.displayName || user.email}!`);
+
+                // Execute any pending download or AI question automatically
+                if (typeof window.pendingAction === 'function') {
+                    const action = window.pendingAction;
+                    window.pendingAction = null;
+                    action();
+                }
+            } catch (error) {
+                let message = "Dështoi logimi me Google. Provoni përsëri.";
+
+                if (error.code === 'auth/popup-blocked') {
+                    // If browser/iframe blocks popups, inform user clearly & allow redirect if top-level
+                    if (window.self === window.top) {
+                        try {
+                            await signInWithRedirect(auth, provider);
+                            return;
+                        } catch (redirectErr) {
+                            message = "Shfletuesi bllokoi dritaren e Google. Lejoni Pop-ups në shfletues dhe provoni përsëri.";
+                        }
+                    } else {
+                        message = "Dritarja e pamjes paraprake (Preview iframe) bllokon dritaret Pop-up të Google. Eksportoni/hapni faqen në një tab të ri ose lejoni Pop-ups për këtë faqe.";
+                    }
+                } else if (error.code === 'auth/popup-closed-by-user') {
+                    message = "Dritarja e logimit u mbyll përpara se të përfundonte.";
+                } else if (error.code === 'auth/cancelled-popup-request') {
+                    message = "Kërkesa e logimit u anulua.";
+                } else if (error.code === 'auth/unauthorized-domain') {
+                    message = `Domain-i (${window.location.hostname}) nuk është i autorizuar në Firebase Console (Authentication -> Settings -> Authorized domains).`;
+                }
+
+                if (errEl) {
+                    errEl.innerText = message;
+                    errEl.classList.remove('hidden');
+                } else {
+                    showToast(message);
+                }
+            }
+        };
+
+        // Sign out user
+        window.logoutUser = async function() {
+            try {
+                await signOut(auth);
+                showToast("Dolët nga llogaria me sukses.");
+            } catch (error) {
+                showToast("Gabim gjatë daljes nga llogaria.");
+            }
+        };
+
+        // Guard downloads behind Google Sign-In
+        window.handleProtectedDownload = function(e, itemName) {
+            if (!window.currentUser) {
+                e.preventDefault();
+                window.pendingAction = () => {
+                    showToast(`Duke nisur shkarkimin për: ${itemName}...`);
+                };
+                openAuthModal(`Ju lutemi logohuni me Google për të shkarkuar "${itemName}".`);
+            } else {
+                e.preventDefault();
+                showToast(`Duke nisur shkarkimin për: ${itemName}...`);
+            }
+        };
+
+        // Persist user session across page refreshes
+        onAuthStateChanged(auth, (user) => {
+            window.currentUser = user;
+            const loginBtn = document.getElementById('googleLoginBtn');
+            const profileBox = document.getElementById('userProfile');
+            const avatarEl = document.getElementById('userAvatar');
+            const nameEl = document.getElementById('userName');
+            const emailEl = document.getElementById('userEmail');
+
+            if (user) {
+                if (loginBtn) loginBtn.classList.add('hidden');
+                if (profileBox) profileBox.classList.remove('hidden');
+                if (avatarEl) avatarEl.src = user.photoURL || 'https://placehold.co/64x64/7C3AED/FFFFFF?text=U';
+                if (nameEl) nameEl.innerText = user.displayName || 'Përdorues';
+                if (emailEl) emailEl.innerText = user.email || '';
+            } else {
+                if (loginBtn) loginBtn.classList.remove('hidden');
+                if (profileBox) profileBox.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
