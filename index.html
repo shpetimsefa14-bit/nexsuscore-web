@@ -30,25 +30,81 @@
             pointer-events: none;
             z-index: 0;
         }
-        /* Liquid Glass Card Surface */
-        .liquid-glass {
-            background: rgba(18, 18, 26, 0.75);
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+        /* Apple-style Liquid Glass Card */
+        .liquid-glass-card {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.9), 
+                        inset 0 0 20px rgba(255, 255, 255, 0.02);
+            transition: none;
         }
+        .liquid-glass-card:hover {
+            background: rgba(0, 0, 0, 0.45);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
         .liquid-dock {
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
-        /* Glass cutout text reflection effect */
+        /* Translucent liquid glass tabs matching white frosted glass style with subtle violet/blue tint */
+        .tab-btn {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(59, 130, 246, 0.08) 100%);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(248, 250, 252, 0.85);
+            transition: none;
+        }
+        .tab-btn:hover {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: rgba(248, 250, 252, 0.95);
+        }
+        .tab-btn.active-tab {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(59, 130, 246, 0.25) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            color: #ffffff;
+        }
+        /* Fully translucent liquid glass button utility with subtle violet/blue gradient tint */
+        .btn-liquid-glass {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.12) 0%, rgba(59, 130, 246, 0.12) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .btn-liquid-glass:hover {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.22) 0%, rgba(59, 130, 246, 0.22) 100%);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+        /* Clean white semi-transparent Headings */
         .glass-text-effect {
-            background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: rgba(255, 255, 255, 0.9);
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9));
         }
+
+        /* Liquid Glass Heading Class for Section Titles */
+        .liquid-glass-heading {
+            color: rgba(255, 255, 255, 0.9);
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.9));
+        }
+
         /* Typing cursor */
         .typing-cursor {
             display: inline-block;
@@ -65,34 +121,38 @@
         }
     </style>
 </head>
-<body class="relative min-h-screen">
+<body class="relative min-h-screen bg-[#000000]">
 
     <!-- Interactive Mouse-Reactive Dot Canvas -->
     <canvas id="dot-canvas"></canvas>
 
     <!-- ================= SECTION A: MINIMALIST TOP NAVIGATION BAR ================= -->
-    <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#050507]/80 border-b border-white/[0.08]">
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#000000]/95 border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Left Side: Custom SVG Logo -->
-            <div class="flex items-center space-x-3">
-                <a href="#" class="flex items-center gap-2">
-                    <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto">
+            <!-- Logo & Brand Title (Freestanding Logo without Box) -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 flex items-center justify-center p-1">
+                    <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_4px_12px_rgba(124,58,237,0.4)]">
                         <defs>
-                            <linearGradient id="ncGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id="ncLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#22d3ee"/>
                                 <stop offset="35%" stop-color="#3b82f6"/>
                                 <stop offset="65%" stop-color="#a855f7"/>
                                 <stop offset="100%" stop-color="#4c1d95"/>
                             </linearGradient>
                         </defs>
-                        <path fill="url(#ncGrad)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
-                        <path fill="url(#ncGrad)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
-                        <path fill="url(#ncGrad)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
+                        <path fill="url(#ncLogoGrad)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
+                        <path fill="url(#ncLogoGrad)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
+                        <path fill="url(#ncLogoGrad)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
                     </svg>
-                </a>
-            </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-brand font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-purple-400 transition">NexusCore</span>
+                    <span class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold" data-i18n="navSubtitleBrand">Optimizer</span>
+                </div>
+            </a>
 
-            <!-- Center Navigation Links -->
+            <!-- Navigation Links -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
                 <a href="#products" class="hover:text-white transition" data-i18n="navProducts">Products</a>
                 <a href="#services" class="hover:text-white transition" data-i18n="navServices">Services</a>
@@ -104,18 +164,18 @@
             <!-- Right Side: Social Icons, Language Selector & CTA Button -->
             <div class="flex items-center space-x-4">
                 <!-- Social Icons in Top Navbar -->
-                <div class="hidden lg:flex items-center space-x-3 text-slate-400">
+                <div class="hidden lg:flex items-center space-x-3.5 text-slate-400">
                     <a href="https://discord.gg/eKdeX8bDpH" target="_blank" class="hover:text-purple-400 transition" title="Discord">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                     </a>
                     <a href="https://github.com/shpetimsefa14-bit/" target="_blank" class="hover:text-purple-400 transition" title="GitHub">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                     </a>
                     <a href="https://www.youtube.com/@NexsusCoreOptimisation" target="_blank" class="hover:text-purple-400 transition" title="YouTube">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
                     <a href="https://www.tiktok.com/@nexsuscoreoptimisation" target="_blank" class="hover:text-purple-400 transition" title="TikTok">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                     </a>
                 </div>
 
@@ -128,30 +188,30 @@
 
                 <!-- Auth Section: Google Login Button OR Logged-in User Profile -->
                 <div id="authContainer" class="flex items-center">
-                    <button id="googleLoginBtn" onclick="loginWithGoogle()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium px-4 py-2 rounded-full text-xs sm:text-sm transition-all backdrop-blur-md">
+                    <button id="googleLoginBtn" onclick="loginWithGoogle()" class="inline-flex items-center gap-2.5 bg-black hover:bg-[#12121a] text-white font-medium px-4 py-2 rounded-full text-xs sm:text-sm transition-all border border-white/20 shadow-md">
                         <svg class="w-4 h-4" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
                             <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
                             <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
                             <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
                         </svg>
-                        <span>Logohu me Google</span>
+                        <span>Sign in with Google</span>
                     </button>
 
                     <!-- User Profile Pill (Shown when logged in) -->
-                    <div id="userProfile" class="hidden flex items-center gap-2.5 bg-[#12121a]/90 border border-purple-500/30 rounded-full pl-1.5 pr-3 py-1 backdrop-blur-md">
-                        <img id="userAvatar" src="" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-purple-400/50">
+                    <div id="userProfile" class="hidden flex items-center gap-2.5 bg-[#12121a]/90 border border-white/20 rounded-full pl-1.5 pr-3 py-1 backdrop-blur-md">
+                        <img id="userAvatar" src="" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-white/30">
                         <div class="hidden sm:flex flex-col text-left leading-tight">
                             <span id="userName" class="text-xs font-semibold text-white truncate max-w-[110px]"></span>
                             <span id="userEmail" class="text-[10px] text-slate-400 truncate max-w-[110px]"></span>
                         </div>
                         <button onclick="logoutUser()" class="ml-1 text-[11px] font-semibold text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-full transition" title="Logout">
-                            Dil
+                            Logout
                         </button>
                     </div>
                 </div>
 
-                <a href="#products" onclick="handleProtectedDownload(event, 'NexusCore Suite')" class="hidden sm:inline-flex items-center justify-center bg-white text-[#050507] hover:bg-slate-200 font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)]" data-i18n="downloadBtn">
+                <a href="#products" onclick="handleProtectedDownload(event, 'NexusCore Suite')" class="hidden sm:inline-flex items-center justify-center btn-liquid-glass text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-all shadow-md" data-i18n="downloadBtn">
                     Download Now
                 </a>
             </div>
@@ -161,28 +221,17 @@
     <!-- ================= SECTION B: HERO SECTION & INTERACTIVE PLATFORM SELECTOR ================= -->
     <section class="relative pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center z-10">
         <!-- Hero Headline -->
-        <h1 id="hero-title" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.15] mb-6 glass-text-effect min-h-[140px] sm:min-h-[160px] relative z-20">
+        <h1 id="hero-title" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-[1.15] mb-6 liquid-glass-heading min-h-[140px] sm:min-h-[160px] relative z-20">
             <!-- Typing effect rendered here -->
         </h1>
 
         <!-- Subtitle -->
-        <p id="hero-subtitle" class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-16 min-h-[80px] glass-text-effect opacity-90 relative z-20 text-center px-4">
+        <p id="hero-subtitle" class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-16 min-h-[80px] opacity-90 relative z-20 text-center px-4">
             <!-- Typing effect rendered here -->
         </p>
 
         <!-- Interactive Center Box (Stitch Style Platform Selector) -->
-        <div class="liquid-glass rounded-3xl max-w-4xl mx-auto p-6 sm:p-8 text-left relative overflow-hidden">
-            <!-- Top bar inside card -->
-            <div class="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-8 hidden">
-                <div class="flex items-center space-x-3">
-                    <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-[0_0_12px_#7c3aed]"></div>
-                    <span id="card-header-tag" class="text-xs uppercase tracking-wider font-semibold text-slate-300">Select your platform</span>
-                </div>
-                <div class="flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">
-                    <span id="system-status" class="text-xs font-medium text-purple-400">System Ready</span>
-                </div>
-            </div>
-
+        <div class="liquid-glass-card rounded-[24px] max-w-4xl mx-auto p-6 sm:p-8 text-left relative overflow-hidden">
             <!-- Dynamic Display Area -->
             <div id="platform-display" class="min-h-[180px] flex flex-col justify-between mb-8 transition-all duration-500">
                 <div>
@@ -198,18 +247,18 @@
                 </div>
             </div>
 
-            <!-- Bottom Control Bar inside Card with Liquid Dock (Tabs as text and buttons only) -->
+            <!-- Bottom Control Bar inside Card with Liquid Dock -->
             <div class="liquid-dock rounded-2xl p-3 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <!-- Toggleable Tabs -->
                 <div id="platform-tabs" class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                    <button onclick="switchPlatform(0)" data-tab="0" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all bg-gradient-to-r from-[#7C3AED] to-[#2563EB] text-white shadow-lg shadow-purple-500/25">Windows App</button>
-                    <button onclick="switchPlatform(1)" data-tab="1" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:text-white hover:bg-white/5">Android (Shizuku)</button>
-                    <button onclick="switchPlatform(2)" data-tab="2" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:text-white hover:bg-white/5">Custom Win 11 ISO</button>
-                    <button onclick="switchPlatform(3)" data-tab="3" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:text-white hover:bg-white/5">PC Diagnostic AI</button>
+                    <button onclick="switchPlatform(0)" data-tab="0" class="tab-btn active-tab px-4 py-2.5 rounded-xl text-xs font-semibold transition-all">Windows App</button>
+                    <button onclick="switchPlatform(1)" data-tab="1" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all">Android (Shizuku)</button>
+                    <button onclick="switchPlatform(2)" data-tab="2" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all">NexusOS</button>
+                    <button onclick="switchPlatform(3)" data-tab="3" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all">PC Diagnostic AI</button>
                 </div>
 
                 <!-- Primary Action Button -->
-                <a id="platform-action" href="#download" onclick="handleProtectedDownload(event, document.getElementById('platform-title').innerText)" class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-medium px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-[0_10px_25px_rgba(124,58,237,0.3)]">
+                <a id="platform-action" href="#download" onclick="handleProtectedDownload(event, document.getElementById('platform-title').innerText)" class="w-full sm:w-auto inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-md backdrop-blur-md">
                     Download .EXE
                 </a>
             </div>
@@ -219,64 +268,84 @@
     <!-- ================= SECTION C: BENTO-GRID ECOSYSTEM & TECHNICAL FEATURES ================= -->
     <section id="products" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4" data-i18n="bentoTitle">Advanced Performance Ecosystem</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight liquid-glass-heading mb-4" data-i18n="bentoTitle">Advanced Performance Ecosystem</h2>
             <p class="text-slate-400 text-sm sm:text-base" data-i18n="bentoSubtitle">System-level engineering designed to unlock your hardware's full potential.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Card 01 -->
-            <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between">
+            <div class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 font-bold text-xl">01</div>
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/15 flex items-center justify-center text-white mb-6 font-bold text-xl">01</div>
                     <h3 class="text-xl font-bold text-white mb-3" data-i18n="c1Title">NexusCore Windows Optimizer</h3>
                     <p class="text-slate-300 text-sm leading-relaxed mb-6" data-i18n="c1Desc">Aggressive RAM cache cleaner, background process terminator, latency reduction, and dedicated GPU optimization module.</p>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">C++ / .NET</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">GPU Boost</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Zero Telemetry</span>
+                <div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">C++ / .NET</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">GPU Boost</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Zero Telemetry</span>
+                    </div>
+                    <button onclick="openProductModal(0)" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl transition backdrop-blur-md">
+                        Learn More &rarr;
+                    </button>
                 </div>
             </div>
 
             <!-- Card 02 -->
-            <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between">
+            <div class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 font-bold text-xl">02</div>
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/15 flex items-center justify-center text-white mb-6 font-bold text-xl">02</div>
                     <h3 class="text-xl font-bold text-white mb-3" data-i18n="c2Title">NexusCore Android & Shizuku Engine</h3>
                     <p class="text-slate-300 text-sm leading-relaxed mb-6" data-i18n="c2Desc">Safe execution of privileged commands via Shizuku API (UID 2000) without Root. Touch calibration & thermal control.</p>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Shizuku UID 2000</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Touch Sensitivity</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Android 11+</span>
+                <div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Shizuku UID 2000</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Touch Sensitivity</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Android 11+</span>
+                    </div>
+                    <button onclick="openProductModal(1)" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl transition backdrop-blur-md">
+                        Learn More &rarr;
+                    </button>
                 </div>
             </div>
 
             <!-- Card 03 -->
-            <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between">
+            <div class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 font-bold text-xl">03</div>
-                    <h3 class="text-xl font-bold text-white mb-3" data-i18n="c3Title">Custom Gaming Windows 11 ISO</h3>
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/15 flex items-center justify-center text-white mb-6 font-bold text-xl">03</div>
+                    <h3 class="text-xl font-bold text-white mb-3" data-i18n="c3Title">NexusOS (Custom Gaming OS)</h3>
                     <p class="text-slate-300 text-sm leading-relaxed mb-6" data-i18n="c3Desc">Engineered specifically for competitive gaming and Android emulators, keeping idle background processes down to 30–35.</p>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">30–35 Processes</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Emulator Ready</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Custom Boot</span>
+                <div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">30–35 Processes</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Emulator Ready</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Custom Boot</span>
+                    </div>
+                    <button onclick="openProductModal(2)" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl transition backdrop-blur-md">
+                        Learn More &rarr;
+                    </button>
                 </div>
             </div>
 
             <!-- Card 04 -->
-            <div id="services" class="liquid-glass rounded-3xl p-8 flex flex-col justify-between">
+            <div id="services" class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 font-bold text-xl">04</div>
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/15 flex items-center justify-center text-white mb-6 font-bold text-xl">04</div>
                     <h3 class="text-xl font-bold text-white mb-3" data-i18n="c4Title">Security Auditing & Custom Scripting</h3>
                     <p class="text-slate-300 text-sm leading-relaxed mb-6" data-i18n="c4Desc">Professional vulnerability assessment, PowerShell & Batch automation script development, and personalized tuning.</p>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">PowerShell / Batch</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Security Audit</span>
-                    <span class="bg-purple-500/10 text-purple-300 text-xs px-3 py-1 rounded-lg border border-purple-500/20">Custom Scripts</span>
+                <div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">PowerShell / Batch</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Standby Cache</span>
+                        <span class="bg-white/5 text-slate-200 text-xs px-3 py-1 rounded-lg border border-white/15">Custom Scripts</span>
+                    </div>
+                    <button onclick="openProductModal(3)" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white text-xs font-semibold py-2.5 rounded-xl transition backdrop-blur-md">
+                        Learn More &rarr;
+                    </button>
                 </div>
             </div>
         </div>
@@ -285,19 +354,19 @@
     <!-- ================= SECTION D: LIVE PERFORMANCE METRICS STRIP ================= -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+            <div class="liquid-glass-card rounded-[24px] p-6 text-center transition-all hover:border-purple-500/30">
                 <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">-65%</div>
                 <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m1">Background Processes</div>
             </div>
-            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+            <div class="liquid-glass-card rounded-[24px] p-6 text-center transition-all hover:border-purple-500/30">
                 <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">+40%</div>
                 <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m2">FPS Stability</div>
             </div>
-            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+            <div class="liquid-glass-card rounded-[24px] p-6 text-center transition-all hover:border-purple-500/30">
                 <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">0%</div>
                 <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m3">Root Required</div>
             </div>
-            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+            <div class="liquid-glass-card rounded-[24px] p-6 text-center transition-all hover:border-purple-500/30">
                 <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">&lt; 15ms</div>
                 <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m4">System Latency</div>
             </div>
@@ -307,163 +376,171 @@
     <!-- ================= SECTION E: FREE VS. VIP TIERS ================= -->
     <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4" data-i18n="pricingTitle">Choose Your Plan</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight liquid-glass-heading mb-4" data-i18n="pricingTitle">Choose Your Plan</h2>
             <p class="text-slate-400 text-sm sm:text-base" data-i18n="pricingSubtitle">Free and VIP options designed for casual users and professionals.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <!-- Standard Plan -->
-            <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between">
+            <div class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between">
                 <div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20" data-i18n="freePlanTag">Standard</span>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-white bg-white/10 px-3 py-1 rounded-full border border-white/20" data-i18n="freePlanTag">Standard</span>
                     <div class="text-3xl font-extrabold text-white mt-4 mb-2">Free <span class="text-sm font-normal text-slate-400">/ forever</span></div>
                     <p class="text-slate-400 text-sm mb-6" data-i18n="freePlanDesc">Essential tools for everyday system optimization.</p>
                     <ul class="space-y-4 text-sm text-slate-300 mb-8">
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="f1">Basic RAM cleaner</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="f2">Standard Windows tweaks</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="f3">Basic Shizuku commands</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="f4">Community support</span>
                         </li>
                     </ul>
                 </div>
-                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore Standard Free')" class="w-full inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-semibold py-3 rounded-xl text-sm transition" data-i18n="downloadFree">Download Free</a>
+                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore Standard Free')" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg border border-white/20 backdrop-blur-md" data-i18n="downloadFree">Download Free</a>
             </div>
 
             <!-- VIP Plan -->
-            <div class="liquid-glass rounded-3xl p-8 flex flex-col justify-between border-purple-500/40 relative shadow-[0_0_30px_rgba(124,58,237,0.15)]">
-                <div class="absolute -top-3 right-8 bg-gradient-to-r from-[#7C3AED] to-[#2563EB] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">VIP Pro</div>
+            <div class="liquid-glass-card rounded-[24px] p-8 flex flex-col justify-between border-white/30 relative shadow-[0_0_30px_rgba(255,255,255,0.08)]">
+                <div class="absolute -top-3 right-8 btn-liquid-glass text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-white/30 backdrop-blur-md">VIP Pro</div>
                 <div>
-                    <span class="text-xs uppercase tracking-wider font-semibold text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20" data-i18n="vipPlanTag">Exclusive</span>
+                    <span class="text-xs uppercase tracking-wider font-semibold text-white bg-white/10 px-3 py-1 rounded-full border border-white/20" data-i18n="vipPlanTag">Exclusive</span>
                     <div class="text-3xl font-extrabold text-white mt-4 mb-2">€19.99 <span class="text-sm font-normal text-slate-400">/ one-time</span></div>
-                    <p class="text-slate-400 text-sm mb-6" data-i18n="vipPlanDesc">Complete unthrottled experience with custom ISO access.</p>
+                    <p class="text-slate-400 text-sm mb-6" data-i18n="vipPlanDesc">Complete unthrottled experience with NexusOS access.</p>
                     <ul class="space-y-4 text-sm text-slate-300 mb-8">
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="v1">Deep kernel-level tweaks</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="v2">Dedicated GPU profiles (Nvidia/AMD/Intel)</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-                            <span data-i18n="v3">Full Custom Windows 11 ISO access</span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span data-i18n="v3">Full NexusOS custom operating system access</span>
                         </li>
                         <li class="flex items-center space-x-3">
-                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
                             <span data-i18n="v4">AI Script Generator & Priority Support</span>
                         </li>
                     </ul>
                 </div>
-                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore VIP Pro')" class="w-full inline-flex items-center justify-center bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg shadow-purple-500/25" data-i18n="getVip">Get VIP Now</a>
+                <a href="#download" onclick="handleProtectedDownload(event, 'NexusCore VIP Pro')" class="w-full inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg border border-white/30 backdrop-blur-md" data-i18n="getVip">Get VIP Now</a>
             </div>
         </div>
     </section>
 
     <!-- ================= SECTION F: INTERACTIVE FAQ ACCORDION ================= -->
-    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto relative z-10">
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative z-10">
         <div class="text-center mb-16">
-            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4" data-i18n="faqTitle">Frequently Asked Questions</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight liquid-glass-heading mb-4" data-i18n="faqTitle">Frequently Asked Questions</h2>
             <p class="text-slate-400 text-sm sm:text-base" data-i18n="faqSubtitle">Clear answers to common questions about NexusCore.</p>
         </div>
 
         <div class="space-y-4">
-            <!-- FAQ Item 1 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
-                <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
+            <!-- FAQ Item 1 (Default Open) -->
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
+                <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-slate-200 transition">
                     <span data-i18n="q1">What is NexusCore Optimizer and how does it work?</span>
-                    <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
+                    <span class="text-xl font-bold text-white transition-transform duration-300" style="transform: rotate(45deg);">&#x2715;</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed space-y-3">
                     <p data-i18n="a1">NexusCore is an advanced engineering platform that eliminates system bloat, optimizes RAM, and frees up CPU/GPU resources for maximum gaming and app performance. It works by purging idle background cache, disabling intrusive telemetry services, adjusting Windows interrupt priorities, and executing deep kernel-level optimizations tailored to your exact hardware specifications.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Technical Deep Dive: Modern operating systems load dozens of background daemon processes, telemetry hooks, pre-fetchers, and update schedulers that continuously consume CPU cycles and memory cache slots. NexusCore communicates directly with the Windows Subsystem and registry architecture to safely purge standby memory lists, disable non-critical Win32 background services, configure Message Signaled Interrupts (MSI mode) for graphics controllers, and reallocate thread priorities specifically towards foreground gaming workloads or high-performance application instances. This ensures your hardware delivers its maximum raw computing output without artificial software throttling.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 2 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q2">Does Android version require Root and is Shizuku safe?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a2">No Root required! It uses the official Shizuku API (UID 2000) via wireless debugging to securely execute privileged shell commands without breaking SafetyNet, voiding your warranty, or compromising device security. Shizuku operates strictly within sandboxed developer permissions.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Security Assurance: Rooting an Android device permanently strips verified boot protections, triggers SafetyNet/Play Integrity failures, blocks banking applications, and voids manufacturer warranties. NexusCore bypasses this limitation entirely by leveraging Android's native ADB (Android Debug Bridge) daemon permissions running under UID 2000 (Shell user). This allows our engine to safely calibrate touch sampling rates, purge system-level cache, manage thermal throttling profiles, and hibernate background apps without modifying partition files or altering system binaries.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 3 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
-                    <span data-i18n="q3">What makes Custom Windows 11 ISO faster?</span>
+                    <span data-i18n="q3">What makes NexusOS faster?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
-                    <p data-i18n="a3">Our custom ISO strips out Cortana, OneDrive bloat, Xbox live background services, consumer apps, and diagnostic telemetry. This slashes idle background processes from 120+ down to a pristine 30–35, freeing up substantial RAM and CPU bandwidth for games and Android emulators.</p>
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
+                    <p data-i18n="a3">NexusOS strips out Cortana, OneDrive bloat, Xbox live background services, consumer apps, and diagnostic telemetry. This slashes idle background processes from 120+ down to a pristine 30–35, freeing up substantial RAM and CPU bandwidth for games and Android emulators.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Performance Architecture: A stock Windows 11 installation comes pre-loaded with unnecessary pre-installed consumer apps, machine learning telemetry collectors, continuous diagnostic tracing services, and virtualization-based security layers that consume up to 4GB of RAM at idle. NexusOS is engineered by stripping out all non-essential components at the source image level while preserving core cryptographic libraries, DirectX 12 runtimes, and full driver compatibility. The result is a pristine operating environment where idle background processes drop from over 120 down to an ultra-lean 30–35, giving your hardware unmatched frame stability in competitive esports titles and heavy Android emulators like BlueStacks or LDPlayer.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 4 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q4">How does the PowerShell and Batch script generator work?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a4">Our intelligent diagnostic analyzer scans your CPU threads, GPU architecture, and storage latency. It then automatically compiles optimized PowerShell and Batch automation scripts designed to tweak registry keys, power plans, and network packet queues specifically for your rig.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Automated Inspection: Generic one-size-fits-all optimization scripts often apply registry edits that conflict with specific hardware combinations. NexusCore's built-in diagnostic engine queries your motherboard chipset, GPU VRAM size, core parking configuration, and network adapter vendor. It then dynamically compiles custom automation scripts that adjust TCP/IP network packet queuing, disable unnecessary power saving states (C-States), configure precise timer resolutions, and optimize graphics driver profile settings tailored exclusively to your unique computer setup.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 5 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q5">What is included in the VIP package and how is it activated?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a5">The VIP package includes unrestricted access to our Custom Windows 11 ISO downloads, unlimited AI script generation, deep kernel-level tweaks, and priority 24/7 technical support. Activation is instant upon secure checkout, providing an activation key linked directly to your account.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">VIP Benefits & License Lifecycle: Purchasing the VIP Pro license grants you lifetime access to our private repository of custom operating system builds, early beta versions of our Windows and Android optimizers, unlimited AI diagnostic consultations, and direct priority Discord support from our lead systems engineers. Activation is bound securely to your authenticated user account, allowing seamless license verification across all your personal gaming rigs without subscription fees or hidden recurring costs.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 6 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q6">Can NexusCore cause instability or break my system?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a6">No. Every tweak, registry modification, and shell command executed by NexusCore undergoes extensive testing across various hardware configurations. Furthermore, automated Windows System Restore points are generated before any deep optimization is applied, allowing instant one-click rollback if desired.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Robust Fail-Safe Protocol: System safety is our utmost priority. Before executing any deep kernel optimization, registry modification, or service termination, NexusCore automatically triggers an official Windows System Restore point and backs up existing registry hives into a secure local recovery container. If any third-party driver conflict arises or you wish to revert changes, our emergency recovery module allows you to restore your system to its exact factory default state with a single click, ensuring absolute peace of mind.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 7 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q7">How often are updates released for the optimizer?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a7">We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates, and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Continuous Engineering Cycle: Operating systems and graphics driver architectures evolve rapidly. Microsoft regularly rolls out cumulative updates that modify registry paths, and GPU manufacturers like Nvidia and AMD frequently introduce new DirectX 12 and Vulkan rendering pipelines. Our engineering team maintains a continuous development cycle, releasing bi-weekly and monthly patches to ensure full compatibility with the latest OS builds, security updates, and driver optimizations without breaking user configurations.</p>
                 </div>
             </div>
 
             <!-- FAQ Item 8 -->
-            <div class="liquid-glass rounded-2xl overflow-hidden transition-all">
+            <div class="liquid-glass-card rounded-[20px] overflow-hidden transition-all">
                 <button onclick="toggleFaq(this)" class="w-full px-6 py-5 text-left flex items-center justify-between text-white font-semibold text-sm sm:text-base hover:text-purple-400 transition">
                     <span data-i18n="q8">Is my personal data or telemetry collected?</span>
                     <span class="text-xl font-bold text-purple-400 transition-transform duration-300">+</span>
                 </button>
-                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden">
+                <div class="faq-content px-6 pb-5 text-slate-300 text-sm leading-relaxed hidden space-y-3">
                     <p data-i18n="a8">Never. NexusCore operates under a strict zero-telemetry and zero-logging policy. We do not track personal files, browsing activity, passwords, or credentials. All diagnostics run locally on your machine.</p>
+                    <p class="text-slate-400 text-xs leading-relaxed">Absolute Privacy Commitment: We believe privacy is a fundamental human right, especially for system engineering utilities. NexusCore is built from the ground up under a strict zero-telemetry and zero-logging policy. The application contains zero third-party analytics trackers, ad SDKs, or background telemetry hooks. All diagnostic scans, benchmark computations, and script generation routines execute entirely on your local machine hardware. Your personal files, credentials, browsing history, and private data remain strictly confidential and are never transmitted to external servers.</p>
                 </div>
             </div>
         </div>
@@ -473,7 +550,7 @@
     <footer class="border-t border-white/[0.08] py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center text-slate-500 text-sm relative z-10">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-2">
-                <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+                <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto drop-shadow">
                     <defs>
                         <linearGradient id="ncGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#22d3ee"/>
@@ -489,18 +566,18 @@
             </div>
             
             <!-- Social Media Icons in Footer -->
-            <div class="flex items-center space-x-5 text-slate-400">
+            <div class="flex items-center space-x-6 text-slate-400">
                 <a href="https://discord.gg/eKdeX8bDpH" target="_blank" class="hover:text-purple-400 transition" title="Discord">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                 </a>
                 <a href="https://github.com/shpetimsefa14-bit/" target="_blank" class="hover:text-purple-400 transition" title="GitHub">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                 </a>
                 <a href="https://www.youtube.com/@NexsusCoreOptimisation" target="_blank" class="hover:text-purple-400 transition" title="YouTube">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 </a>
                 <a href="https://www.tiktok.com/@nexsuscoreoptimisation" target="_blank" class="hover:text-purple-400 transition" title="TikTok">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
                 </a>
             </div>
 
@@ -514,7 +591,7 @@
 
     <!-- ================= PRIVACY POLICY MODAL ================= -->
     <div id="privacyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="liquid-glass rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10 relative">
+        <div class="liquid-glass-card rounded-[24px] max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10 relative">
             <button onclick="closePrivacyModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-lg transition">✕</button>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 font-brand">Privacy Policy for NexusCore</h2>
             <p class="text-xs text-purple-400 mb-6">Effective Date: November 13, 2026</p>
@@ -589,49 +666,69 @@
             </div>
 
             <div class="mt-8 pt-6 border-t border-white/10 text-right">
-                <button onclick="closePrivacyModal()" class="bg-white text-black font-semibold px-6 py-2.5 rounded-xl text-sm transition hover:bg-slate-200">Close</button>
+                <button onclick="closePrivacyModal()" class="btn-liquid-glass hover:bg-white/15 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= EXPANDED PRODUCT TECHNICAL DETAILS MODAL ================= -->
+    <div id="productDetailModal" class="fixed inset-0 z-[65] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
+        <div class="liquid-glass-card rounded-[24px] max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-10 relative border border-white/30">
+            <button onclick="closeProductModal()" class="absolute top-6 right-6 w-10 h-10 rounded-full btn-liquid-glass hover:bg-white/20 text-white flex items-center justify-center font-bold text-lg transition">✕</button>
+            <div id="modalProductNumber" class="text-xs uppercase tracking-widest text-slate-300 font-semibold mb-2"></div>
+            <h2 id="modalProductTitle" class="text-2xl sm:text-3xl font-extrabold text-white mb-4 font-brand"></h2>
+            
+            <div id="modalProductContent" class="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed select-text">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                <a id="modalProductDownloadBtn" href="#download" onclick="closeProductModal(); handleProtectedDownload(event, document.getElementById('modalProductTitle').innerText);" class="inline-flex items-center justify-center btn-liquid-glass hover:bg-white/20 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition shadow-lg border border-white/20">
+                    Download & Install
+                </a>
+                <button onclick="closeProductModal()" class="btn-liquid-glass hover:bg-white/20 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition">Close</button>
             </div>
         </div>
     </div>
 
     <!-- ================= AUTH REQUIRED PROMPT MODAL ================= -->
     <div id="authPromptModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="liquid-glass rounded-3xl max-w-md w-full p-6 sm:p-8 text-center relative border border-purple-500/30">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">✕</button>
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
-                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <div class="liquid-glass-card rounded-[24px] max-w-md w-full p-6 sm:p-8 text-center relative border border-white/30">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full btn-liquid-glass text-white flex items-center justify-center text-sm transition">✕</button>
+            <div class="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2 font-brand">Kërkohet Logimi</h3>
+            <h3 class="text-xl font-bold text-white mb-2 font-brand">Authentication Required</h3>
             <p id="authPromptReason" class="text-slate-300 text-sm mb-6 leading-relaxed">
-                Ju lutemi logohuni me llogarinë tuaj Google për të shkarkuar skedarët ose për të biseduar me NexusCore AI.
+                Please sign in with your Google account to download files or chat with NexusCore AI.
             </p>
-            <button onclick="loginWithGoogle()" class="w-full inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-100 text-[#050507] font-semibold py-3 px-5 rounded-xl text-sm transition shadow-lg">
+            <button onclick="loginWithGoogle()" class="w-full inline-flex items-center justify-center gap-3 bg-black hover:bg-[#12121a] text-white font-semibold py-3 px-5 rounded-xl text-sm transition border border-white/20 shadow-lg">
                 <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
                     <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
                     <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
                     <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
                 </svg>
-                <span>Vazhdo me Google</span>
+                <span>Sign in with Google</span>
             </button>
             <p id="authErrorText" class="text-red-400 text-xs mt-3 hidden"></p>
         </div>
     </div>
 
     <!-- ================= TOAST NOTIFICATION ================= -->
-    <div id="toastNotice" class="fixed top-24 right-6 z-[70] liquid-glass border border-purple-500/40 text-white text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-2xl hidden transition-all"></div>
+    <div id="toastNotice" class="fixed top-24 right-6 z-[70] liquid-glass-card border border-white/30 text-white text-xs sm:text-sm px-4 py-3 rounded-2xl shadow-2xl hidden transition-all"></div>
 
     <!-- ================= COOKIE & PRIVACY CONSENT BANNER ================= -->
     <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 bg-[#0a0a10]/95 backdrop-blur-xl border-t border-white/10 shadow-2xl transition-transform duration-500">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <p class="text-slate-300 text-xs sm:text-sm text-center md:text-left leading-relaxed">
-                We use cookies and similar technologies to enhance your experience, analyze site traffic, and ensure secure system diagnostics. By clicking <strong class="text-white">"Accept All"</strong>, you consent to our use of cookies and <button onclick="openPrivacyModal()" class="text-purple-400 underline hover:text-purple-300">Privacy Policy</button>.
+                We use cookies and similar technologies to enhance your experience, analyze site traffic, and ensure secure system diagnostics. By clicking <strong class="text-white">"Accept All"</strong>, you consent to our use of cookies and <button onclick="openPrivacyModal()" class="text-white underline hover:text-slate-200">Privacy Policy</button>.
             </p>
             <div class="flex items-center space-x-3 shrink-0">
-                <button onclick="rejectCookies()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition">
+                <button onclick="rejectCookies()" class="btn-liquid-glass hover:bg-white/20 text-white font-semibold px-5 py-2.5 rounded-xl text-xs sm:text-sm transition">
                     Reject All
                 </button>
-                <button onclick="acceptCookies()" class="bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg shadow-purple-500/25">
+                <button onclick="acceptCookies()" class="btn-liquid-glass hover:bg-white/20 text-white font-semibold px-6 py-2.5 rounded-xl text-xs sm:text-sm transition shadow-lg border border-white/30 backdrop-blur-md">
                     Accept All
                 </button>
             </div>
@@ -639,10 +736,10 @@
     </div>
 
     <!-- ================= DRAGGABLE FLOATING AI WIDGET (GEMINI API) ================= -->
-    <div id="aiWidgetContainer" class="fixed z-50 select-none" style="right: 32px; bottom: 100px; touch-action: none;">
+    <div id="aiWidgetContainer" class="fixed z-50 select-none cursor-grab active:cursor-grabbing" style="right: 32px; bottom: 100px; touch-action: none;">
         <!-- Circular Floating Button with NexusCore Logo -->
-        <div id="aiToggleBtn" onclick="toggleAIChat()" class="w-14 h-14 rounded-full bg-[#12121a]/90 backdrop-blur-xl text-white flex items-center justify-center shadow-[0_0_25px_rgba(124,58,237,0.4)] cursor-pointer hover:scale-105 transition-transform border border-white/15 relative group p-3">
-            <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+        <div id="aiToggleBtn" onclick="toggleAIChat()" class="w-14 h-14 rounded-full bg-[#12121a]/90 backdrop-blur-xl text-white flex items-center justify-center shadow-[0_0_25px_rgba(124,58,237,0.4)] hover:scale-105 transition-transform border border-white/15 relative group p-3">
+            <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="w-full h-full pointer-events-none">
                 <defs>
                     <linearGradient id="ncGradFloat" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#22d3ee"/>
@@ -658,7 +755,7 @@
         </div>
 
         <!-- Chat Window (Initially Hidden) -->
-        <div id="aiChatWindow" class="liquid-glass rounded-3xl w-[340px] sm:w-[380px] h-[480px] flex flex-col shadow-2xl border border-white/15 overflow-hidden hidden absolute bottom-0 right-0">
+        <div id="aiChatWindow" class="liquid-glass-card rounded-[24px] w-[340px] sm:w-[380px] h-[480px] flex flex-col shadow-2xl border border-white/15 overflow-hidden hidden absolute bottom-0 right-0 cursor-default">
             <!-- Chat Header -->
             <div class="p-4 bg-[#12121a]/90 border-b border-white/10 flex items-center justify-between">
                 <div class="flex items-center space-x-2">
@@ -680,11 +777,11 @@
                 <button onclick="toggleAIChat()" class="text-slate-400 hover:text-white font-bold text-lg px-2">✕</button>
             </div>
 
-            <!-- Chat Messages Body (Selectable text + Copy buttons) -->
+            <!-- Chat Messages Body -->
             <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs sm:text-sm text-slate-200 select-text">
-                <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] leading-relaxed relative group">
+                <div class="bg-white/5 border border-white/15 rounded-2xl p-3 max-w-[85%] leading-relaxed relative group">
                     <div class="msg-text">Hello! I am your NexusCore Gemini Assistant powered by AI. How can I help you optimize your system or troubleshoot hardware today?</div>
-                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-purple-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy">
+                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy">
                         <span>Copy</span>
                     </button>
                 </div>
@@ -693,26 +790,28 @@
             <!-- Chat Input Footer -->
             <div class="p-3 bg-[#12121a]/90 border-t border-white/10 flex items-center space-x-2">
                 <input id="chatInput" type="text" onkeydown="handleChatKeyDown(event)" placeholder="Ask Gemini AI..." class="flex-1 bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-purple-500">
-                <button onclick="sendGeminiMessage()" class="bg-gradient-to-r from-[#7C3AED] to-[#2563EB] hover:opacity-90 text-white font-semibold px-4 py-2 rounded-xl text-xs transition">Send</button>
+                <button onclick="sendGeminiMessage()" class="btn-liquid-glass hover:bg-white/15 text-white font-semibold px-4 py-2 rounded-xl text-xs transition border border-white/20">Send</button>
             </div>
-            <div class="text-[10px] text-center text-slate-500 pb-2">Pyt Gemini</div>
+            <div class="text-[10px] text-center text-slate-500 pb-2">Ask Gemini • AI can make mistakes</div>
         </div>
     </div>
 
     <!-- ================= JAVASCRIPT LOGIC & LOCALIZATION ================= -->
     <script>
-        // ================= INTERACTIVE MOUSE-REACTIVE DOT CANVAS =================
         const canvas = document.getElementById('dot-canvas');
         const ctx = canvas.getContext('2d');
 
-        let mouse = { x: -1000, y: -1000 };
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            initDots();
         });
+
+        // Reduced mouse repulsion radius for a smaller, more focused effect
+        const mouse = { x: -1000, y: -1000, radius: 100 };
 
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
@@ -724,360 +823,545 @@
             mouse.y = -1000;
         });
 
-        const spacing = 28;
+        let dots = [];
+        const spacing = 26; // Increased dot frequency (closer spacing)
 
-        function drawDots() {
-            ctx.clearRect(0, 0, width, height);
-
-            for (let x = spacing / 2; x < width; x += spacing) {
-                for (let y = spacing / 2; y < height; y += spacing) {
-                    let dx = mouse.x - x;
-                    let dy = mouse.y - y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    let maxDist = 180;
-
-                    let radius = 1.2;
-                    let alpha = 0.25;
-
-                    if (dist < maxDist) {
-                        let force = (1 - dist / maxDist);
-                        let angle = Math.atan2(dy, dx);
-                        
-                        let shiftX = x - Math.cos(angle) * force * 24;
-                        let shiftY = y - Math.sin(angle) * force * 24;
-
-                        radius = 1.2 + force * 2.5;
-                        alpha = 0.25 + force * 0.75;
-
-                        ctx.beginPath();
-                        ctx.arc(shiftX, shiftY, radius, 0, Math.PI * 2);
-                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                        ctx.fill();
-                        continue;
-                    }
-
-                    ctx.beginPath();
-                    ctx.arc(x, y, radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                    ctx.fill();
+        function initDots() {
+            dots = [];
+            for (let x = spacing; x < width; x += spacing) {
+                for (let y = spacing; y < height; y += spacing) {
+                    dots.push({
+                        x: x,
+                        y: y,
+                        baseX: x,
+                        baseY: y,
+                        vx: 0,
+                        vy: 0
+                    });
                 }
             }
-            requestAnimationFrame(drawDots);
         }
-        drawDots();
 
-        // ================= PRIVACY MODAL & COOKIE BANNER =================
+        function animateDots() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < dots.length; i++) {
+                let dot = dots[i];
+                
+                let dx = mouse.x - dot.x;
+                let dy = mouse.y - dot.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+
+                // Black hole repulsion & magnification effect when mouse approaches
+                if (dist < mouse.radius && dist > 0) {
+                    let force = (mouse.radius - dist) / mouse.radius;
+                    let angle = Math.atan2(dy, dx);
+                    // Push away from mouse
+                    dot.vx -= Math.cos(angle) * force * 5.0;
+                    dot.vy -= Math.sin(angle) * force * 5.0;
+                }
+
+                // Spring back force to original parallel grid position
+                let bdx = dot.baseX - dot.x;
+                let bdy = dot.baseY - dot.y;
+                dot.vx += bdx * 0.1;
+                dot.vy += bdy * 0.1;
+
+                // Damping for smooth fluid spring return
+                dot.vx *= 0.78;
+                dot.vy *= 0.78;
+
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+
+                // Compute distance to mouse for scaling and fading brightness
+                let currentDistToMouse = Math.sqrt((mouse.x - dot.x) * (mouse.x - dot.x) + (mouse.y - dot.y) * (mouse.y - dot.y));
+                let isNear = currentDistToMouse < mouse.radius;
+                
+                let alpha = 0.25;
+                let radius = 1.5;
+
+                if (isNear) {
+                    let factor = 1 - (currentDistToMouse / mouse.radius);
+                    alpha = 0.25 + factor * 0.75; // Fade out gradually from pure white near cursor
+                    radius = 1.5 + factor * 3.5;
+                }
+
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            requestAnimationFrame(animateDots);
+        }
+
+        initDots();
+        animateDots();
+
+        // Platform Selector Data
+        const platforms = [
+            {
+                title: "NexusCore Windows Optimizer Pro",
+                desc: "Aggressive RAM cache cleaner, background process terminator, latency reduction, and dedicated GPU optimization module (Nvidia, AMD, Intel).",
+                tech: ["C++ / .NET", "GPU Boost", "Zero Telemetry"],
+                actionText: "Download .EXE"
+            },
+            {
+                title: "NexusCore Android & Shizuku Engine",
+                desc: "Safe execution of privileged commands via Shizuku API (UID 2000) without Root. Touch calibration, thermal control, and background app hibernation.",
+                tech: ["Shizuku UID 2000", "Touch Sensitivity", "Android 11+"],
+                actionText: "Download .APK"
+            },
+            {
+                title: "NexusOS (Custom Gaming OS)",
+                desc: "Engineered specifically for competitive gaming and Android emulators, keeping idle background processes down to 30–35 with stripped telemetry.",
+                tech: ["30–35 Processes", "Emulator Ready", "Custom Boot"],
+                actionText: "Download ISO"
+            },
+            {
+                title: "PC Diagnostic AI & Scripting",
+                desc: "Professional vulnerability assessment, PowerShell & Batch automation script development, and personalized hardware tuning modules.",
+                tech: ["PowerShell / Batch", "Standby Cache", "Custom Scripts"],
+                actionText: "Launch Tool"
+            }
+        ];
+
+        function switchPlatform(index) {
+            const p = platforms[index];
+            document.getElementById('platform-title').innerText = p.title;
+            document.getElementById('platform-desc').innerText = p.desc;
+            
+            const techContainer = document.getElementById('platform-tech');
+            techContainer.innerHTML = '';
+            p.tech.forEach(t => {
+                const span = document.createElement('span');
+                span.className = "bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 text-purple-300 text-xs px-3 py-1 rounded-lg";
+                span.innerText = t;
+                techContainer.appendChild(span);
+            });
+
+            document.getElementById('platform-action').innerText = p.actionText;
+
+            // Update active tab styles
+            const buttons = document.querySelectorAll('#platform-tabs button');
+            buttons.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('active-tab');
+                } else {
+                    btn.classList.remove('active-tab');
+                }
+            });
+        }
+
+        // Product Modal Details (Up to 300 words detailed technical breakdown)
+        const productDetails = [
+            {
+                number: "01",
+                title: "NexusCore Windows Optimizer",
+                content: `
+                    <p class="mb-4"><strong>Comprehensive Architectural Breakdown:</strong> NexusCore Windows Optimizer is engineered at the native Win32 API and kernel level to eliminate system latency, purge standby memory leaks, and optimize interrupt request levels (MSI Mode) for dedicated graphics cards (Nvidia, AMD, and Intel).</p>
+                    <p class="mb-4">Modern Windows operating systems run dozens of persistent background telemetry collectors, diagnostic tracing daemons, pre-fetchers, and software update schedulers that continuously consume precious CPU cycles and RAM cache slots. When launching competitive esports titles or resource-intensive applications, these background tasks introduce micro-stutters and frame rate drops.</p>
+                    <p class="mb-4">Our optimizer communicates directly with the Windows Registry and service architecture to safely suspend non-critical Win32 services, optimize TCP/IP network packet queuing, configure precise timer resolutions, and purge standby memory lists in real-time. The result is a dramatic reduction in frame-time variance and an average 40% improvement in 1% low frame stability without risking system integrity or stability.</p>
+                    <p>Furthermore, NexusCore includes automated system restore point generation prior to executing any deep optimization, ensuring absolute peace of mind and instant one-click rollback capability.</p>
+                `
+            },
+            {
+                number: "02",
+                title: "NexusCore Android & Shizuku Engine",
+                content: `
+                    <p class="mb-4"><strong>Advanced Mobile Engineering:</strong> Android devices suffer from aggressive thermal throttling, background app bloat, and inconsistent touch sampling latency caused by heavy manufacturer skins and OEM resource managers.</p>
+                    <p class="mb-4">Traditionally, fixing these bottlenecks required rooting the device—a risky procedure that triggers SafetyNet/Play Integrity failures, blocks banking applications, and permanently voids hardware warranties. NexusCore solves this limitation by leveraging the official Shizuku API running under UID 2000 (Shell user permission level).</p>
+                    <p class="mb-4">Through secure wireless debugging protocols, our engine executes privileged shell commands to calibrate touch sampling rates, hibernate resource-hogging background applications, manage thermal throttling governors, and optimize CPU governor scaling profiles. This delivers tournament-grade touch responsiveness and sustained gaming frame rates without breaking verified boot security or compromising user data.</p>
+                `
+            },
+            {
+                number: "03",
+                title: "NexusOS (Custom Gaming OS)",
+                content: `
+                    <p class="mb-4"><strong>Next-Gen Custom Operating System:</strong> Stock Windows 11 ISOs come pre-loaded with consumer bloatware, Xbox live telemetry daemons, Cortana, OneDrive integration, and virtualization-based security layers that consume up to 4GB of RAM at idle.</p>
+                    <p class="mb-4">NexusOS is a meticulously engineered custom operating system image built specifically for competitive esports athletes and heavy Android emulator users (BlueStacks, LDPlayer, MuMu). We strip out all non-essential consumer components at the source image level while preserving core cryptographic libraries, DirectX 12 runtimes, and full driver compatibility.</p>
+                    <p class="mb-4">By stripping out unnecessary background telemetry and system services, idle background processes drop from over 120 down to a pristine 30–35. This frees up gigabytes of RAM and substantial CPU thread bandwidth, giving your hardware unmatched performance headroom and exceptional stability.</p>
+                `
+            },
+            {
+                number: "04",
+                title: "Security Auditing & Custom Scripting",
+                content: `
+                    <p class="mb-4"><strong>Professional Vulnerability Assessment & Automation:</strong> Every hardware configuration is unique. Generic one-size-fits-all optimization scripts often apply registry edits that conflict with specific motherboard chipsets, CPU cache sizes, or network adapters.</p>
+                    <p class="mb-4">Our security auditing and custom scripting module performs an in-depth hardware inspection of your system, analyzing CPU thread topology, GPU VRAM architecture, storage queue depth, and network latency.</p>
+                    <p class="mb-4">Based on these telemetry insights, our intelligent diagnostic engine dynamically compiles custom PowerShell and Batch automation scripts tailored exclusively to your rig. Whether you need automated standby cache purging, custom power plan configurations, or network packet prioritization, our professional tools deliver precise, predictable results.</p>
+                `
+            }
+        ];
+
+        function openProductModal(index) {
+            const item = productDetails[index];
+            document.getElementById('modalProductNumber').innerText = item.number;
+            document.getElementById('modalProductTitle').innerText = item.title;
+            document.getElementById('modalProductContent').innerHTML = item.content;
+            document.getElementById('productDetailModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hidden');
+        }
+
+        // FAQ Accordion Toggle Function
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('span:last-child');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '✕';
+                icon.style.transform = 'rotate(45deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Privacy Policy Modal
         function openPrivacyModal() {
             document.getElementById('privacyModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
         }
 
         function closePrivacyModal() {
             document.getElementById('privacyModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
         }
 
+        // Cookie Banner
         function acceptCookies() {
-            const banner = document.getElementById('cookieBanner');
-            banner.style.transform = 'translateY(150%)';
-            setTimeout(() => banner.remove(), 500);
+            document.getElementById('cookieBanner').style.transform = 'translateY(150%)';
+            localStorage.setItem('nexus_cookies', 'accepted');
         }
 
         function rejectCookies() {
-            const banner = document.getElementById('cookieBanner');
-            banner.style.transform = 'translateY(150%)';
-            setTimeout(() => banner.remove(), 500);
+            document.getElementById('cookieBanner').style.transform = 'translateY(150%)';
+            localStorage.setItem('nexus_cookies', 'rejected');
         }
 
-        // ================= DRAGGABLE FLOATING AI WIDGET LOGIC =================
-        const widget = document.getElementById('aiWidgetContainer');
-        const toggleBtn = document.getElementById('aiToggleBtn');
-        const chatWindow = document.getElementById('aiChatWindow');
-        let isChatOpen = false;
-        let isDragging = false;
-        let startX, startY, initialLeft, initialTop;
-
-        toggleBtn.addEventListener('mousedown', (e) => {
-            if (isChatOpen) return; // Don't drag when chat is open
-            isDragging = false;
-            startX = e.clientX;
-            startY = e.clientY;
-            const rect = widget.getBoundingClientRect();
-            initialLeft = rect.left;
-            initialTop = rect.top;
-
-            // Switch to fixed left/top positioning relative to viewport
-            widget.style.right = 'auto';
-            widget.style.bottom = 'auto';
-            widget.style.left = initialLeft + 'px';
-            widget.style.top = initialTop + 'px';
-
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('nexus_cookies')) {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
         });
 
-        // Touch support for dragging
-        toggleBtn.addEventListener('touchstart', (e) => {
-            if (isChatOpen) return;
-            isDragging = false;
-            const touch = e.touches[0];
-            startX = touch.clientX;
-            startY = touch.clientY;
-            const rect = widget.getBoundingClientRect();
-            initialLeft = rect.left;
-            initialTop = rect.top;
+        // Auth & Protected Download Logic
+        let currentUser = null;
 
-            widget.style.right = 'auto';
-            widget.style.bottom = 'auto';
-            widget.style.left = initialLeft + 'px';
-            widget.style.top = initialTop + 'px';
-
-            document.addEventListener('touchmove', onTouchMove);
-            document.addEventListener('touchend', onTouchEnd);
-        });
-
-        function onMouseMove(e) {
-            const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
-            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-                isDragging = true;
-            }
-            if (isDragging) {
-                let newLeft = initialLeft + dx;
-                let newTop = initialTop + dy;
-                
-                // Keep within screen bounds
-                newLeft = Math.max(10, Math.min(window.innerWidth - 70, newLeft));
-                newTop = Math.max(80, Math.min(window.innerHeight - 70, newTop));
-
-                widget.style.left = newLeft + 'px';
-                widget.style.top = newTop + 'px';
-            }
-        }
-
-        function onMouseUp() {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-        }
-
-        function onTouchMove(e) {
-            const touch = e.touches[0];
-            const dx = touch.clientX - startX;
-            const dy = touch.clientY - startY;
-            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-                isDragging = true;
-            }
-            if (isDragging) {
-                let newLeft = initialLeft + dx;
-                let newTop = initialTop + dy;
-
-                newLeft = Math.max(10, Math.min(window.innerWidth - 70, newLeft));
-                newTop = Math.max(80, Math.min(window.innerHeight - 70, newTop));
-
-                widget.style.left = newLeft + 'px';
-                widget.style.top = newTop + 'px';
-            }
-        }
-
-        function onTouchEnd() {
-            document.removeEventListener('touchmove', onTouchMove);
-            document.removeEventListener('touchend', onTouchEnd);
-        }
-
-        function toggleAIChat() {
-            if (isDragging) return; // Prevent opening if it was a drag
-            isChatOpen = !isChatOpen;
-            if (isChatOpen) {
-                toggleBtn.classList.add('hidden');
-                chatWindow.classList.remove('hidden');
+        function handleProtectedDownload(event, productName) {
+            event.preventDefault();
+            if (!currentUser) {
+                document.getElementById('authPromptReason').innerText = `Please sign in with your Google account to download "${productName}".`;
+                document.getElementById('authPromptModal').classList.remove('hidden');
             } else {
-                toggleBtn.classList.remove('hidden');
-                chatWindow.classList.add('hidden');
+                showToast(`Starting secure download for ${productName}...`);
+                setTimeout(() => {
+                    const blob = new Blob([`NexusCore Optimizer Package - ${productName}\nAuthenticated User: ${currentUser.email}\nStatus: Verified Pro License`], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${productName.replace(/\s+/g, '_')}_NexusCore.zip`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 1000);
             }
         }
 
-        // ================= GEMINI API CHAT INTEGRATION =================
-        const apiKey = ""; // Injected automatically by the runtime environment
-        let chatHistory = [];
+        function closeAuthModal() {
+            document.getElementById('authPromptModal').classList.add('hidden');
+        }
 
-        function handleChatKeyDown(e) {
-            if (e.key === 'Enter') {
+        // Google Login Simulation
+        function loginWithGoogle() {
+            closeAuthModal();
+            // Simulate successful Google Authentication
+            currentUser = {
+                name: "Shpëtim Sefa",
+                email: "nexuscoreoptimizer@gmail.com",
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+            };
+
+            document.getElementById('googleLoginBtn').classList.add('hidden');
+            const profile = document.getElementById('userProfile');
+            profile.classList.remove('hidden');
+            profile.classList.add('flex');
+            document.getElementById('userName').innerText = currentUser.name;
+            document.getElementById('userEmail').innerText = currentUser.email;
+            document.getElementById('userAvatar').src = currentUser.avatar;
+
+            showToast("Successfully signed in with Google!");
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            document.getElementById('userProfile').classList.add('hidden');
+            document.getElementById('userProfile').classList.remove('flex');
+            document.getElementById('googleLoginBtn').classList.remove('hidden');
+            showToast("Logged out successfully.");
+        }
+
+        // Toast Notification Helper
+        function toastTimer(msg) {
+            const t = document.getElementById('toastNotice');
+            t.innerText = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => {
+                t.classList.add('hidden');
+            }, 3500);
+        }
+        window.showToast = toastTimer;
+
+        // Draggable Floating AI Widget Logic across Entire Page
+        const widgetContainer = document.getElementById('aiWidgetContainer');
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let initialLeft = 0;
+        let initialTop = 0;
+        let hasMoved = false;
+
+        widgetContainer.addEventListener('mousedown', (e) => {
+            // Prevent drag if clicking inside the chat window
+            if (e.target.closest('#aiChatWindow') && !e.target.closest('#aiChatWindow > div:first-child')) return;
+            isDragging = true;
+            hasMoved = false;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            
+            const rect = widgetContainer.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+            
+            widgetContainer.style.right = 'auto';
+            widgetContainer.style.bottom = 'auto';
+            widgetContainer.style.left = initialLeft + 'px';
+            widgetContainer.style.top = initialTop + 'px';
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - dragStartX;
+            const dy = e.clientY - dragStartY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                hasMoved = true;
+            }
+            
+            let newLeft = initialLeft + dx;
+            let newTop = initialTop + dy;
+            
+            // Constrain within window bounds
+            const maxLeft = window.innerWidth - widgetContainer.offsetWidth;
+            const maxTop = window.innerHeight - widgetContainer.offsetHeight;
+            
+            newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+            newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+            
+            widgetContainer.style.left = newLeft + 'px';
+            widgetContainer.style.top = newTop + 'px';
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Touch support for dragging on mobile/tablet
+        widgetContainer.addEventListener('touchstart', (e) => {
+            if (e.target.closest('#aiChatWindow') && !e.target.closest('#aiChatWindow > div:first-child')) return;
+            isDragging = true;
+            hasMoved = false;
+            const touch = e.touches[0];
+            dragStartX = touch.clientX;
+            dragStartY = touch.clientY;
+            
+            const rect = widgetContainer.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+            
+            widgetContainer.style.right = 'auto';
+            widgetContainer.style.bottom = 'auto';
+            widgetContainer.style.left = initialLeft + 'px';
+            widgetContainer.style.top = initialTop + 'px';
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const touch = e.touches[0];
+            const dx = touch.clientX - dragStartX;
+            const dy = touch.clientY - dragStartY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                hasMoved = true;
+            }
+            
+            let newLeft = initialLeft + dx;
+            let newTop = initialTop + dy;
+            
+            const maxLeft = window.innerWidth - widgetContainer.offsetWidth;
+            const maxTop = window.innerHeight - widgetContainer.offsetHeight;
+            
+            newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+            newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+            
+            widgetContainer.style.left = newLeft + 'px';
+            widgetContainer.style.top = newTop + 'px';
+        }, { passive: true });
+
+        window.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Floating AI Widget Toggle (only toggles if it wasn't dragged)
+        function toggleAIChat() {
+            if (hasMoved) return;
+            const win = document.getElementById('aiChatWindow');
+            win.classList.toggle('hidden');
+        }
+
+        function handleChatKeyDown(event) {
+            if (event.key === 'Enter') {
                 sendGeminiMessage();
             }
         }
 
-        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
-            for (let i = 0; i < retries; i++) {
-                const response = await fetch(url, options);
-                if (response.ok || (response.status !== 429 && response.status < 500)) {
-                    return response;
-                }
-                if (i < retries - 1) {
-                    await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
-                }
-            }
-            return fetch(url, options);
-        }
-
+        // Live Gemini AI Chat Integration using provided API Key
         async function sendGeminiMessage() {
-            const inputEl = document.getElementById('chatInput');
-            const messagesContainer = document.getElementById('chatMessages');
-            const prompt = inputEl.value.trim();
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
 
-            if (!prompt) return;
+            const chatMessages = document.getElementById('chatMessages');
 
-            // Require Google Sign-In before asking AI
-            if (!window.currentUser) {
-                window.pendingAction = () => sendGeminiMessage();
-                openAuthModal("Ju lutemi logohuni me llogarinë tuaj Google për t'i bërë pyetje NexusCore Gemini AI.");
-                return;
-            }
+            // User Message Bubble
+            const userBubble = document.createElement('div');
+            userBubble.className = "bg-white/10 border border-white/20 rounded-2xl p-3 max-w-[85%] ml-auto leading-relaxed relative group";
+            userBubble.innerHTML = `<div class="msg-text">${escapeHtml(text)}</div><button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy"><span>Copy</span></button>`;
+            chatMessages.appendChild(userBubble);
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Append user message to UI with Copy button
-            messagesContainer.innerHTML += `
-                <div class="bg-white/10 rounded-2xl p-3 max-w-[85%] ml-auto leading-relaxed text-right">
-                    <div class="msg-text text-left">${escapeHtml(prompt)}</div>
-                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-black/30 hover:bg-black/50 px-2 py-0.5 rounded transition" title="Copy">
-                        <span>Copy</span>
-                    </button>
-                </div>
-            `;
-            inputEl.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            // Add user prompt to conversation history
-            chatHistory.push({
-                role: "user",
-                parts: [{ text: prompt }]
-            });
-
-            // Append loading indicator
-            const loadingId = 'loading-' + Date.now();
-            messagesContainer.innerHTML += `
-                <div id="${loadingId}" class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] text-purple-300 animate-pulse">
-                    Gemini is thinking...
-                </div>
-            `;
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            // AI Loading / Typing Bubble
+            const aiBubble = document.createElement('div');
+            aiBubble.className = "bg-white/5 border border-white/15 rounded-2xl p-3 max-w-[85%] leading-relaxed relative group space-y-2";
+            aiBubble.innerHTML = `<div class="msg-text text-slate-400 italic">NexusCore Gemini AI is analyzing your hardware request...</div>`;
+            chatMessages.appendChild(aiBubble);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                // Use gemini-3-flash-preview with runtime-injected API key
+                // Call Gemini API using gemini-3-flash-preview model and user API key
+                const apiKey = "AQ.Ab8RN6LZ_dbLgzNkVegqH5m0V7ixuHDse81SVwxhyA4uG2m9ng";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
                 
-                const payload = {
-                    contents: chatHistory,
-                    systemInstruction: {
-                        parts: [{
-                            text: "You are NexusCore AI, an advanced system optimization, Windows/Android (Shizuku) tuning, and hardware engineering expert. Answer the user's questions clearly, accurately, and in the same language they use (Albanian, English, German, or Spanish)."
-                        }]
-                    }
-                };
-
-                const response = await fetchWithRetry(apiUrl, {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `You are the NexusCore Gemini Technical Assistant. Provide an expert, detailed, multi-paragraph technical response about system optimization, Windows tweaks, Shizuku Android engine, or custom scripts based on this user question: "${text}"`
+                            }]
+                        }],
+                        systemInstruction: {
+                            parts: [{ text: "Act as a world-class system engineering and hardware optimization assistant for NexusCore." }]
+                        }
+                    })
                 });
 
                 const data = await response.json();
-                const loadingEl = document.getElementById(loadingId);
-                if (loadingEl) loadingEl.remove();
+                
+                if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0]) {
+                    const aiResponseText = data.candidates[0].content.parts[0].text;
+                    const paragraphs = aiResponseText.split('\n').filter(p => p.trim().length > 0);
+                    let formattedHtml = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
 
-                if (!response.ok) {
-                    const errorMsg = data?.error?.message || `HTTP Error ${response.status}`;
-                    messagesContainer.innerHTML += `
-                        <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-3 max-w-[85%] text-red-300 text-xs">
-                            <strong>API Error:</strong> ${escapeHtml(errorMsg)}
-                        </div>
-                    `;
-                    chatHistory.pop(); // Remove failed message from history
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    return;
-                }
-
-                const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-                if (reply) {
-                    chatHistory.push({
-                        role: "model",
-                        parts: [{ text: reply }]
-                    });
-
-                    messagesContainer.innerHTML += `
-                        <div class="bg-purple-500/10 border border-purple-500/20 rounded-2xl p-3 max-w-[85%] leading-relaxed">
-                            <div class="msg-text whitespace-pre-line">${escapeHtml(reply)}</div>
-                            <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-purple-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy">
-                                <span>Copy</span>
-                            </button>
-                        </div>
+                    aiBubble.innerHTML = `
+                        <div class="msg-text space-y-2 select-text">${formattedHtml}</div>
+                        <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy"><span>Copy</span></button>
                     `;
                 } else {
-                    messagesContainer.innerHTML += `
-                        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-3 max-w-[85%] text-yellow-300">
-                            No response generated. Please try rephrasing your question.
-                        </div>
-                    `;
+                    throw new Error("Invalid API response structure");
                 }
-            } catch (err) {
-                const loadingEl = document.getElementById(loadingId);
-                if (loadingEl) loadingEl.remove();
-                chatHistory.pop();
-                messagesContainer.innerHTML += `
-                    <div class="bg-red-500/10 border border-red-500/20 rounded-2xl p-3 max-w-[85%] text-red-300">
-                        Network error connecting to Gemini API.
+            } catch (error) {
+                aiBubble.innerHTML = `
+                    <div class="msg-text space-y-2 text-red-400">
+                        <p>Error connecting to Gemini API. Please verify your internet connection or API key validity.</p>
                     </div>
+                    <button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy"><span>Copy</span></button>
                 `;
             }
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        function escapeHtml(string) {
+            return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
-        function copyMessageText(button) {
-            const msgDiv = button.parentElement.querySelector('.msg-text');
-            if (!msgDiv) return;
-            const textToCopy = msgDiv.innerText;
-
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
+        function copyMessageText(btn) {
+            const textToCopy = btn.previousElementSibling.innerText;
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
             try {
                 document.execCommand('copy');
-                const span = button.querySelector('span');
-                const originalText = span.innerText;
-                span.innerText = 'Copied!';
-                setTimeout(() => {
-                    span.innerText = originalText;
-                }, 1500);
+                showToast("Text copied to clipboard!");
             } catch (err) {
-                console.error('Copy failed', err);
+                showToast("Failed to copy text.");
             }
-            document.body.removeChild(textarea);
+            document.body.removeChild(textArea);
         }
 
-        // ================= TRANSLATIONS DICTIONARY =================
+        // Typing Effect for Hero Section
+        const heroTitleText = "Next-Gen System Optimization & Engineering";
+        const heroSubtitleText = "Unlock peak hardware performance on Windows and Android with NexusCore Optimizer, Shizuku Engine, and NexusOS.";
+        
+        let titleIdx = 0;
+        let subtitleIdx = 0;
+
+        function typeHeroTitle() {
+            if (titleIdx < heroTitleText.length) {
+                document.getElementById('hero-title').innerHTML = heroTitleText.substring(0, titleIdx + 1) + '<span class="typing-cursor"></span>';
+                titleIdx++;
+                setTimeout(typeHeroTitle, 35);
+            } else {
+                document.getElementById('hero-title').innerHTML = heroTitleText;
+                setTimeout(typeHeroSubtitle, 200);
+            }
+        }
+
+        function typeHeroSubtitle() {
+            if (subtitleIdx < heroSubtitleText.length) {
+                document.getElementById('hero-subtitle').innerText = heroSubtitleText.substring(0, subtitleIdx + 1);
+                subtitleIdx++;
+                setTimeout(typeHeroSubtitle, 20);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeHeroTitle, 400);
+        });
+
+        // Multilingual Translation Dictionary
         const translations = {
             en: {
-                heroTitle: "Next-gen architecture for Maximum system-level optimization",
-                heroSubtitle: "Hardware and system-level engineering for Windows, Android (No Root), and custom OS environments. Slash latency, unlock full CPU/GPU throughput, and eliminate background bloat.",
-                downloadBtn: "Download Now",
                 navProducts: "Products",
                 navServices: "Services",
                 navPlans: "Plans",
                 navFaq: "FAQ",
                 navPrivacy: "Privacy Policy",
+                navSubtitleBrand: "Optimizer",
+                downloadBtn: "Download Now",
                 bentoTitle: "Advanced Performance Ecosystem",
                 bentoSubtitle: "System-level engineering designed to unlock your hardware's full potential.",
                 c1Title: "NexusCore Windows Optimizer",
                 c1Desc: "Aggressive RAM cache cleaner, background process terminator, latency reduction, and dedicated GPU optimization module.",
                 c2Title: "NexusCore Android & Shizuku Engine",
                 c2Desc: "Safe execution of privileged commands via Shizuku API (UID 2000) without Root. Touch calibration & thermal control.",
-                c3Title: "Custom Gaming Windows 11 ISO",
+                c3Title: "NexusOS (Custom Gaming OS)",
                 c3Desc: "Engineered specifically for competitive gaming and Android emulators, keeping idle background processes down to 30–35.",
                 c4Title: "Security Auditing & Custom Scripting",
                 c4Desc: "Professional vulnerability assessment, PowerShell & Batch automation script development, and personalized tuning.",
@@ -1095,59 +1379,58 @@
                 f4: "Community support",
                 downloadFree: "Download Free",
                 vipPlanTag: "Exclusive",
-                vipPlanDesc: "Complete unthrottled experience with custom ISO access.",
+                vipPlanDesc: "Complete unthrottled experience with NexusOS access.",
                 v1: "Deep kernel-level tweaks",
                 v2: "Dedicated GPU profiles (Nvidia/AMD/Intel)",
-                v3: "Full Custom Windows 11 ISO access",
+                v3: "Full NexusOS custom operating system access",
                 v4: "AI Script Generator & Priority Support",
                 getVip: "Get VIP Now",
                 faqTitle: "Frequently Asked Questions",
                 faqSubtitle: "Clear answers to common questions about NexusCore.",
                 q1: "What is NexusCore Optimizer and how does it work?",
-                a1: "NexusCore is an advanced engineering platform that eliminates system bloat, optimizes RAM, and frees up CPU/GPU resources for maximum gaming and app performance. It works by purging idle background cache, disabling intrusive telemetry services, adjusting Windows interrupt priorities, and executing deep kernel-level optimizations tailored to your exact hardware specifications.",
+                a1: "NexusCore is an advanced engineering platform that eliminates system bloat, optimizes RAM, and frees up CPU/GPU resources for maximum gaming and app performance.",
                 q2: "Does Android version require Root and is Shizuku safe?",
-                a2: "No Root required! It uses the official Shizuku API (UID 2000) via wireless debugging to securely execute privileged shell commands without breaking SafetyNet, voiding your warranty, or compromising device security. Shizuku operates strictly within sandboxed developer permissions.",
-                q3: "What makes Custom Windows 11 ISO faster?",
-                a3: "Our custom ISO strips out Cortana, OneDrive bloat, Xbox live background services, consumer apps, and diagnostic telemetry. This slashes idle background processes from 120+ down to a pristine 30–35, freeing up substantial RAM and CPU bandwidth for games and Android emulators.",
+                a2: "No Root required! It uses the official Shizuku API (UID 2000) via wireless debugging to securely execute privileged shell commands without breaking SafetyNet.",
+                q3: "What makes NexusOS faster?",
+                a3: "NexusOS strips out Cortana, OneDrive bloat, Xbox live background services, and telemetry down to 30–35 idle processes.",
                 q4: "How does the PowerShell and Batch script generator work?",
-                a4: "Our intelligent diagnostic analyzer scans your CPU threads, GPU architecture, and storage latency. It then automatically compiles optimized PowerShell and Batch automation scripts designed to tweak registry keys, power plans, and network packet queues specifically for your rig.",
+                a4: "Our intelligent diagnostic analyzer scans your CPU threads, GPU architecture, and storage latency to compile optimized automation scripts.",
                 q5: "What is included in the VIP package and how is it activated?",
-                a5: "The VIP package includes unrestricted access to our Custom Windows 11 ISO downloads, unlimited AI script generation, deep kernel-level tweaks, and priority 24/7 technical support. Activation is instant upon secure checkout, providing an activation key linked directly to your account.",
+                a5: "The VIP package includes unrestricted access to custom Windows 11 ISO downloads, unlimited AI script generation, and priority support.",
                 q6: "Can NexusCore cause instability or break my system?",
-                a6: "No. Every tweak, registry modification, and shell command executed by NexusCore undergoes extensive testing across various hardware configurations. Furthermore, automated Windows System Restore points are generated before any deep optimization is applied, allowing instant one-click rollback if desired.",
+                a6: "No. Automated Windows System Restore points are generated before any deep optimization is applied for instant rollback.",
                 q7: "How often are updates released for the optimizer?",
-                a7: "We release bi-weekly and monthly updates to align with major Windows security patches, Android OS updates, and new graphics driver performance optimizations released by Nvidia, AMD, and Intel.",
+                a7: "We release bi-weekly and monthly updates to align with major Windows security patches and graphics driver optimizations.",
                 q8: "Is my personal data or telemetry collected?",
-                a8: "Never. NexusCore operates under a strict zero-telemetry and zero-logging policy. We do not track personal files, browsing activity, passwords, or credentials. All diagnostics run locally on your machine.",
+                a8: "Never. NexusCore operates under a strict zero-telemetry and zero-logging policy.",
                 privacyPolicyFooter: "Privacy Policy",
                 terms: "Terms",
                 copyright: "© 2026 NexusCore Optimizer. All rights reserved."
             },
             sq: {
-                heroTitle: "Arkitekturë e gjeneratës së re për optimizim maksimal në nivel sistemi",
-                heroSubtitle: "Inxhinieri në nivel hardueri dhe sistemi për Windows, Android (Pa Root) dhe mjedise të personalizuara OS. Zvogëloni vonesën, zhbllokoni performancën e plotë të CPU/GPU dhe eliminoni ngarkesat në sfond.",
-                downloadBtn: "Shkarko Tani",
                 navProducts: "Produktet",
                 navServices: "Shërbimet",
-                navPlans: "Planet",
-                navFaq: "FAQ",
+                navPlans: "Paketat",
+                navFaq: "Pyetjet",
                 navPrivacy: "Politika e Privatësisë",
-                bentoTitle: "Ekokosistem i Avancuar i Performancës",
-                bentoSubtitle: "Inxhinieri në nivel sistemi e krijuar për të zhbllokuar potencialin e plotë të harduerit tuaj.",
-                c1Title: "Optimizuesi Windows i NexusCore",
-                c1Desc: "Pastrues agresiv i cache-it të RAM-it, ndërprerës i proceseve në sfond, zvogëlim i vonesës dhe modul i dedikuar për GPU.",
-                c2Title: "Motori Android & Shizuku i NexusCore",
-                c2Desc: "Ekzekutim i sigurt i komandave të privilegjuara përmes Shizuku API (UID 2000) pa Root. Kalibrim i prekjes dhe kontroll termik.",
-                c3Title: "ISO Windows 11 e Personalizuar për Gaming",
-                c3Desc: "E ndërtuar posaçërisht për lojëra konkurruese dhe emulatorë, duke mbajtur proceset në sfond në vetëm 30–35.",
-                c4Title: "Auditimi i Sigurisë & Skriptimi i Personalizuar",
-                c4Desc: "Vlerësim profesional i dobësive, zhvillim i skripteve PowerShell & Batch dhe akndim i personalizuar.",
+                navSubtitleBrand: "Optimizuesi",
+                downloadBtn: "Shkarko Tani",
+                bentoTitle: "Eko-sistemi i Performancës së Avancuar",
+                bentoSubtitle: "Inxhinieri në nivel sistemi e krijuar për të çliruar potencialin e plotë të pajisjes tuaj.",
+                c1Title: "Optimizuesi NexusCore për Windows",
+                c1Desc: "Pastrues agresiv i cache-it të RAM-it, ndërprerës i proceseve në sfond, ulje e latencës dhe modul i dedikuar për GPU.",
+                c2Title: "Mutori Android & Shizuku i NexusCore",
+                c2Desc: "Ekzekutim i sigurt i komandave të privilegjuara përmes Shizuku API (UID 2000) pa Root. Kalibrim prekjeje.",
+                c3Title: "NexusOS (OS i Përshtatur për Lojëra)",
+                c3Desc: "I ndërtuar posaçërisht për lojëra dhe emulatorë Android, duke ulur proceset në sfond në 30–35.",
+                c4Title: "Auditimi i Sigurisë & Skriptet e Përshtatura",
+                c4Desc: "Vlerësim profesional i dobësive, zhvillim i skripteve PowerShell & Batch dhe akutim i personalizuar.",
                 m1: "Procese në Sfond",
                 m2: "Stabilitet FPS",
-                m3: "Nevojë për Root",
-                m4: "Vonesë Sistemi",
-                pricingTitle: "Zgjidhni Planin Tuaj",
-                pricingSubtitle: "Opsione Falas dhe VIP të dizajnuara për përdoruesit dhe profesionistët.",
+                m3: "Kërkohet Root",
+                m4: "Latenca e Sistemit",
+                pricingTitle: "Zgjidhni Paketën Tuaj",
+                pricingSubtitle: "Opsione falas dhe VIP të krijuara për përdoruesit e thjeshtë dhe profesionistët.",
                 freePlanTag: "Standard",
                 freePlanDesc: "Mjete thelbësore për optimizimin e përditshëm të sistemit.",
                 f1: "Pastrues bazë i RAM-it",
@@ -1156,53 +1439,52 @@
                 f4: "Mbështetje nga komuniteti",
                 downloadFree: "Shkarko Falas",
                 vipPlanTag: "Ekskluzive",
-                vipPlanDesc: "Përvojë e plotë pa kufizime me akses në ISO të personalizuar.",
-                v1: "Përmirësime të thella në nivel kernel-i",
+                vipPlanDesc: "Përvojë e plotë pa kufizime me akses në NexusOS.",
+                v1: "Përmirësime të thella në nivel kernel",
                 v2: "Profile të dedikuara për GPU (Nvidia/AMD/Intel)",
-                v3: "Akses i plotë në ISO Custom Windows 11",
-                v4: "Gjenerues AI skriptesh & Mbështetje prioritare",
+                v3: "Akses i plotë në sistemin operativ NexusOS",
+                v4: "Gjenerues AI i Skripteve & Mbështetje Prioritare",
                 getVip: "Merr VIP Tani",
-                faqTitle: "Pyetje të Bëra Shpesh",
+                faqTitle: "Pyetjet e Bëra Më Shpesh",
                 faqSubtitle: "Përgjigje të qarta për pyetjet rreth NexusCore.",
-                q1: "Çfarë është NexusCore Optimizer dhe si funksionon?",
-                a1: "NexusCore është një platformë e avancuar inxhinierike që eliminon ngarkesat e panevojshme të sistemit, optimizon RAM-in dhe liron burimet e CPU/GPU. Ajo funksionon duke pastruar cache-in në sfond, çaktivizuar shërbimet e telemetrisë dhe ekzekutuar optimizime të thella të kernelit.",
-                q2: "A kërkon versioni për Android Root dhe a është i sigurt Shizuku?",
-                a2: "Nuk kërkon Root! Përdor Shizuku API (UID 2000) përmes debugimit me valë për të ekzekutuar në mënyrë të sigurt komanda shell pa prekur garancinë apo sigurinë e pajisjes suaj.",
-                q3: "Çfarë e bën Custom Windows 11 ISO më të shpejtë?",
-                a3: "ISO jonë e personalizuar heq Cortanan, bloatware-in e OneDrive, shërbimet e Xbox live dhe telemetrinë. Kjo ul proceset në sfond nga 120+ në vetëm 30–35, duke liruar RAM dhe CPU për lojëra.",
+                q1: "Çfarë është NexusCore Optimizer dhe si punon?",
+                a1: "NexusCore është një platformë e avancuar inxhinierike që eliminon ngarkesën e sistemit, optimizon RAM-in dhe çliron burimet e CPU/GPU.",
+                q2: "A kërkon versioni Android Root dhe a është Shizuku i sigurt?",
+                a2: "Pa Root! Përdor Shizuku API zyrtar (UID 2000) përmes debugimit pa tel për të ekzekutuar komanda të privilegjuara në mënyrë të sigurt.",
+                q3: "Çfarë e bën NexusOS më të shpejtë?",
+                a3: "NexusOS heq Cortana, bloatin e OneDrive, shërbimet e Xbox dhe telemetrinë, duke ulur proceset në sfond në 30–35.",
                 q4: "Si funksionon gjeneruesi i skripteve PowerShell dhe Batch?",
-                a4: "Analizatori ynë inteligjent skanon fijet e CPU-së, arkitekturën e GPU-së dhe gjeneron skripte automatizimi të personalizuara për të konfiguruar regjistrin dhe rrjetin tuaj.",
+                a4: "Analizuesi ynë diagnostik skanon fijet e CPU, arkitekturën e GPU dhe latencën e memories për të përpiluar skripte të optimizuara.",
                 q5: "Çfarë përfshihet në paketën VIP dhe si aktivizohet?",
-                a5: "Paketa VIP përfshin akses të plotë në shkarkimet ISO Custom Windows 11, skripte AI të pakufizuara dhe mbështetje teknike 24/7. Aktivizimi bëhet në çast pas blerjes.",
-                q6: "A mund të shkaktojë paqëndrueshmëri NexusCore në sistem?",
-                a6: "Jo. Çdo ndryshim dhe skript i ekzekutuar kalon testime rigoroze. Pikat e rikthimit të sistemit (System Restore) gjenerohen automatikisht para çdo optimizimi të thellë.",
-                q7: "Sa shpesh lëshohen përditësime për optimizuesin?",
-                a7: "Ne lëshojmë përditësime dy-javore dhe mujore për t'u përshtatur me patch-et e sigurisë së Windows, Android dhe driver-ët grafikë të Nvidia, AMD dhe Intel.",
-                q8: "A mblidhen të dhënat e mia personale ose telemetria?",
-                a8: "Asnjëherë. NexusCore funksionon me një politikë të rreptë pa telemetri. Ne nuk gjurmojmë skedarë personalë, fjalëkalime apo kredenciale.",
+                a5: "Paketa VIP përfshin akses të pakufizuar në shkarkimet e ISO të Windows 11, gjenerim pa limit të skripteve AI dhe mbështetje priority.",
+                q6: "A mund të shkaktojë paqëndrueshmëri NexusCore?",
+                a6: "Jo. Pikat e rikuperimit (System Restore) gjenerohen automatikisht para çdo optimizimi për kthim të menjëhershëm.",
+                q7: "Sa shpesh lëshohen përditësimet?",
+                a7: "Ne lëshojmë përditësime dyjavore dhe mujore për t'u përshtatur me zakonet e sigurisë së Windows dhe drejtuesit e grafikës.",
+                q8: "A mblidhen të dhënat e mia personale?",
+                a8: "Asnjëherë. NexusCore vepron nën një politikë të rreptë pa telemetri dhe pa regjistrim të dhënash.",
                 privacyPolicyFooter: "Politika e Privatësisë",
                 terms: "Kushtet",
                 copyright: "© 2026 NexusCore Optimizer. Të gjitha të drejtat e rezervuara."
             },
             de: {
-                heroTitle: "Architektur der nächsten Generation für maximale Systemoptimierung",
-                heroSubtitle: "Hardware- und System-Engineering für Windows, Android (Kein Root) und benutzerdefinierte OS-Umgebungen. Reduzieren Sie Latenzen, maximieren Sie den CPU/GPU-Durchsatz und eliminieren Sie Hintergrund-Bloat.",
-                downloadBtn: "Jetzt herunterladen",
                 navProducts: "Produkte",
                 navServices: "Dienste",
-                navPlans: "Pläne",
+                navPlans: "Preise",
                 navFaq: "FAQ",
                 navPrivacy: "Datenschutz",
+                navSubtitleBrand: "Optimierer",
+                downloadBtn: "Herunterladen",
                 bentoTitle: "Erweitertes Performance-Ökosystem",
-                bentoSubtitle: "System-Engineering zur Entfaltung des vollen Potenzials Ihrer Hardware.",
+                bentoSubtitle: "Systemnahe Entwicklung zur Entfaltung des vollen Hardwarepotenzials.",
                 c1Title: "NexusCore Windows Optimizer",
-                c1Desc: "Aggressiver RAM-Cache-Cleaner, Hintergrundprozess-Terminator, Latenzreduzierung und GPU-Optimierungsmodul.",
+                c1Desc: "Aggressiver RAM-Cache-Cleaner, Hintergrundprozess-Terminator, Latenzreduzierung und dediziertes GPU-Optimierungsmodul.",
                 c2Title: "NexusCore Android & Shizuku Engine",
-                c2Desc: "Sichere Ausführung privilegierter Befehle via Shizuku API (UID 2000) ohne Root. Touch-Kalibrierung & Thermikkontrolle.",
-                c3Title: "Benutzerdefinierte Gaming Windows 11 ISO",
-                c3Desc: "Speziell für kompetitives Gaming und Android-Emulatoren entwickelt (30–35 Hintergrundprozesse).",
-                c4Title: "Sicherheitsprüfung & Benutzerdefinierte Skripte",
-                c4Desc: "Professionelle Schwachstellenanalyse, PowerShell- und Batch-Skriptentwicklung sowie personalisiertes Tuning.",
+                c2Desc: "Sichere Ausführung privilegierter Befehle über die Shizuku API (UID 2000) ohne Root. Touch-Kalibrierung & Thermik.",
+                c3Title: "NexusOS (Custom Gaming OS)",
+                c3Desc: "Speziell entwickelt für kompetitives Gaming und Android-Emulatoren, reduziert Leerlaufprozesse auf 30–35.",
+                c4Title: "Sicherheitsprüfung & Skripting",
+                c4Desc: "Professionelle Schwachstellenanalyse, PowerShell & Batch Automatisierungsskripte sowie personalisiertes Tuning.",
                 m1: "Hintergrundprozesse",
                 m2: "FPS-Stabilität",
                 m3: "Root erforderlich",
@@ -1210,427 +1492,114 @@
                 pricingTitle: "Wählen Sie Ihren Plan",
                 pricingSubtitle: "Kostenlose und VIP-Optionen für Gelegenheitsnutzer und Profis.",
                 freePlanTag: "Standard",
-                freePlanDesc: "Grundlegende Tools für die alltägliche Systemoptimierung.",
-                f1: "Einfacher RAM-Cleaner",
+                freePlanDesc: "Grundlegende Tools für die tägliche Systemoptimierung.",
+                f1: "Basis RAM-Cleaner",
                 f2: "Standard Windows-Tweaks",
-                f3: "Einfache Shizuku-Befehle",
+                f3: "Basis Shizuku Befehle",
                 f4: "Community-Support",
                 downloadFree: "Kostenlos laden",
                 vipPlanTag: "Exklusiv",
-                vipPlanDesc: "Volles Erlebnis ohne Einschränkungen mit individuellem ISO-Zugang.",
-                v1: "Tiefgehende Kernel-Tweaks",
+                vipPlanDesc: "Vollständiges, ungedrosseltes Erlebnis mit NexusOS-Zugang.",
+                v1: "Tiefe Kernel-Level Tweaks",
                 v2: "Dedizierte GPU-Profile (Nvidia/AMD/Intel)",
-                v3: "Voller Custom Windows 11 ISO-Zugang",
-                v4: "KI-Skriptgenerator & Prioritäts-Support",
-                getVip: "VIP Jetzt holen",
+                v3: "Vollständiger NexusOS Betriebssystem-Zugang",
+                v4: "KI-Skript-Generator & Prioritäts-Support",
+                getVip: "VIP holen",
                 faqTitle: "Häufig gestellte Fragen",
-                faqSubtitle: "Klare Antworten auf häufige Fragen zu NexusCore.",
-                q1: "Was ist NexusCore Optimizer und wie funktioniert er?",
-                a1: "NexusCore ist eine fortschrittliche Engineering-Plattform, die System-Bloat entfernt, den RAM optimiert und CPU/GPU-Ressourcen freigibt.",
-                q2: "Benötigt die Android-Version Root und ist Shizuku sicher?",
-                a2: "Kein Root erforderlich! Es verwendet die offizielle Shizuku API (UID 2000) über kabelloses Debugging zur sicheren Ausführung von Shell-Befehlen.",
-                q3: "Was macht die Custom Windows 11 ISO schneller?",
-                a3: "Unsere benutzerdefinierte ISO entfernt Cortana, OneDrive, Xbox-Dienste und Telemetrie (30–35 Prozesse).",
-                q4: "Wie funktioniert der PowerShell- und Batch-Skriptgenerator?",
-                a4: "Unser intelligenter Analysator scannt CPU-Threads und GPU-Architektur und kompiliert automatisch optimierte Skripte.",
-                q5: "Was ist im VIP-Paket enthalten und wie wird es aktiviert?",
-                a5: "Das VIP-Paket enthält uneingeschränkten Zugriff auf ISO-Downloads, unbegrenzte KI-Skripte und 24/7-Support.",
-                q6: "Kann NexusCore Instabilität verursachen?",
-                a6: "Nein. Jede Änderung wird rigoros getestet und es werden automatisch Windows-Wiederherstellungspunkte erstellt.",
+                faqSubtitle: "Klare Antworten zu NexusCore.",
+                q1: "Was ist der NexusCore Optimizer?",
+                a1: "NexusCore ist eine fortschrittliche Engineering-Plattform zur Beseitigung von Systemmüll und Optimierung von RAM und CPU/GPU.",
+                q2: "Benötigt die Android-Version Root?",
+                a2: "Kein Root erforderlich! Verwendet die offizielle Shizuku API (UID 2000) via kabellosem Debugging.",
+                q3: "Was macht NexusOS schneller?",
+                a3: "NexusOS entfernt Cortana, OneDrive-Bloat und Telemetrie und reduziert Leerlaufprozesse auf 30–35.",
+                q4: "Wie funktioniert der Skriptgenerator?",
+                a4: "Der Diagnostikanalysator scannt Ihre Hardware, um optimierte Automatisierungsskripte zu kompilieren.",
+                q5: "Was ist im VIP-Paket enthalten?",
+                a5: "Uneingeschränkter Zugriff auf benutzerdefinierte Windows 11 ISOs, unbegrenzte KI-Skripte und Prioritätssupport.",
+                q6: "Kann NexusCore Systeminstabilität verursachen?",
+                a6: "Nein. Vor jeder Optimierung werden automatisch Windows-Wiederherstellungspunkte erstellt.",
                 q7: "Wie oft werden Updates veröffentlicht?",
-                a7: "Wir veröffentlichen zweiwöchentliche und monatliche Updates passend zu Windows-Sicherheitspatches und GPU-Treibern.",
-                q8: "Werden persönliche Daten oder Telemetriedaten gesammelt?",
-                a8: "Niemals. NexusCore arbeitet mit einer strikten Zero-Telemetrie-Richtlinie.",
+                a7: "Wir veröffentlichen zweiwöchentliche und monatliche Updates passend zu Windows-Sicherheitspatches.",
+                q8: "Werden persönliche Daten gesammelt?",
+                a8: "Niemals. NexusCore arbeitet unter einer strikten Zero-Telemetry-Richtlinie.",
                 privacyPolicyFooter: "Datenschutz",
                 terms: "AGB",
                 copyright: "© 2026 NexusCore Optimizer. Alle Rechte vorbehalten."
             },
             es: {
-                heroTitle: "Arquitectura de próxima generación para optimización máxima del sistema",
-                heroSubtitle: "Ingeniería a nivel de hardware y sistema para Windows, Android (Sin Root) y entornos OS personalizados. Reduce la latencia, desbloquea el rendimiento de CPU/GPU y elimina procesos en segundo plano.",
-                downloadBtn: "Descargar Ahora",
                 navProducts: "Productos",
                 navServices: "Servicios",
                 navPlans: "Planes",
                 navFaq: "FAQ",
                 navPrivacy: "Política de Privacidad",
+                navSubtitleBrand: "Optimizador",
+                downloadBtn: "Descargar",
                 bentoTitle: "Ecosistema de Rendimiento Avanzado",
                 bentoSubtitle: "Ingeniería a nivel de sistema diseñada para desbloquear todo el potencial de tu hardware.",
-                c1Title: "Optimizador Windows NexusCore",
-                c1Desc: "Limpiador agresivo de caché RAM, terminación de procesos, reducción de latencia y módulo GPU dedicado.",
-                c2Title: "Motor Android & Shizuku NexusCore",
-                c2Desc: "Ejecución segura de comandos mediante Shizuku API (UID 2000) sin Root. Calibración táctil y control térmico.",
-                c3Title: "ISO Windows 11 Personalizada para Gaming",
-                c3Desc: "Diseñada específicamente para gaming competitivo y emuladores (30–35 procesos en segundo plano).",
-                c4Title: "Auditoría de Seguridad y Skripteado Personalizado",
-                c4Desc: "Evaluación profesional de vulnerabilidades, desarrollo de scripts PowerShell/Batch y ajuste personalizado.",
+                c1Title: "NexusCore Windows Optimizer",
+                c1Desc: "Limpiador agresivo de caché RAM, terminador de procesos en segundo plano y módulo de optimización GPU.",
+                c2Title: "NexusCore Android y Shizuku Engine",
+                c2Desc: "Ejecución segura de comandos privilegiados mediante Shizuku API (UID 2000) sin Root.",
+                c3Title: "NexusOS (SO de Juegos Personalizado)",
+                c3Desc: "Diseñado para juegos competitivos y emuladores Android, manteniendo procesos inactivos en 30–35.",
+                c4Title: "Auditoría de Seguridad y Skripts",
+                c4Desc: "Evaluación profesional de vulnerabilidades y desarrollo de scripts de automatización PowerShell y Batch.",
                 m1: "Procesos en Segundo Plano",
-                m2: "Estabilidad de FPS",
+                m2: "Estabilidad FPS",
                 m3: "Root Requerido",
                 m4: "Latencia del Sistema",
                 pricingTitle: "Elige tu Plan",
                 pricingSubtitle: "Opciones gratuitas y VIP diseñadas para usuarios ocasionales y profesionales.",
                 freePlanTag: "Estándar",
                 freePlanDesc: "Herramientas esenciales para la optimización diaria del sistema.",
-                f1: "Limpiador de RAM básico",
+                f1: "Limpiador RAM básico",
                 f2: "Tweaks estándar de Windows",
-                f3: "Comandos Shizuku básicos",
-                f4: "Soporte de la comunidad",
+                f3: "Comandos básicos de Shizuku",
+                f4: "Soporte comunitario",
                 downloadFree: "Descargar Gratis",
                 vipPlanTag: "Exclusivo",
-                vipPlanDesc: "Experiencia completa sin restricciones con acceso a ISO personalizada.",
-                v1: "Tweaks profundos a nivel de kernel",
+                vipPlanDesc: "Experiencia completa sin restricciones con acceso a NexusOS.",
+                v1: "Ajustes profundos a nivel de kernel",
                 v2: "Perfiles GPU dedicados (Nvidia/AMD/Intel)",
-                v3: "Acceso total a ISO Custom Windows 11",
-                v4: "Generador de scripts por IA y soporte prioritario",
-                getVip: "Obtener VIP Ahora",
+                v3: "Acceso completo al sistema operativo NexusOS",
+                v4: "Generador de scripts de IA y soporte prioritario",
+                getVip: "Obtener VIP",
                 faqTitle: "Preguntas Frecuentes",
                 faqSubtitle: "Respuestas claras a preguntas comunes sobre NexusCore.",
                 q1: "¿Qué es NexusCore Optimizer y cómo funciona?",
-                a1: "NexusCore es una plataforma de ingeniería avanzada que elimina el bloatware, optimiza la RAM y libera recursos de CPU/GPU.",
-                q2: "¿La versión de Android requiere Root y es seguro Shizuku?",
-                a2: "¡No requiere Root! Utiliza la API oficial de Shizuku (UID 2000) mediante depuración inalámbrica.",
-                q3: "¿Qué hace que la ISO Custom de Windows 11 sea más rápida?",
-                a3: "Nuestra ISO personalizada elimina Cortana, OneDrive y telemetría (30–35 procesos).",
+                a1: "NexusCore es una plataforma de ingeniería avanzada que elimina el bloatware y optimiza los recursos de RAM y CPU/GPU.",
+                q2: "¿La versión de Android requiere Root?",
+                a2: "¡Sin Root! Utiliza la API oficial de Shizuku (UID 2000) mediante depuración inalámbrica.",
+                q3: "¿Qué hace que NexusOS sea más rápido?",
+                a3: "NexusOS elimina Cortana, OneDrive y la telemetría, reduciendo los procesos inactivos a 30–35.",
                 q4: "¿Cómo funciona el generador de scripts PowerShell y Batch?",
-                a4: "Nuestro analizador inteligente escanea los hilos de tu CPU y arquitectura de GPU.",
-                q5: "¿Qué se incluye en el paquete VIP y cómo se activa?",
-                a5: "El paquete VIP incluye acceso total a descargas ISO personalizadas y soporte técnico 24/7.",
-                q6: "¿Puede NexusCore causar inestabilidad en el sistema?",
-                a6: "No. Cada ajuste se prueba rigurosamente y se generan puntos de restauración automática.",
+                a4: "Nuestro analizador diagnóstico escanea tu hardware para compilar scripts de automatización optimizados.",
+                q5: "¿Qué incluye el paquete VIP?",
+                a5: "Acceso ilimitado a descargas de ISOs personalizadas de Windows 11, generación de scripts de IA y soporte prioritario.",
+                q6: "¿Puede NexusCore causar inestabilidad?",
+                a6: "No. Se generan puntos de Restauración del Sistema de Windows automáticamente antes de cualquier optimización.",
                 q7: "¿Con qué frecuencia se lanzan actualizaciones?",
-                a7: "Lanzamos actualizaciones quincenales y mensuales alineadas con los parches de seguridad.",
-                q8: "¿Se recopilan datos personales o telemetría?",
-                a8: "Nunca. NexusCore opera con una política estricta de cero telemetría.",
+                a7: "Lanzamos actualizaciones quincenales y mensuales alineadas con los parches de seguridad de Windows.",
+                q8: "¿Se recopilan mis datos personales?",
+                a8: "Nunca. NexusCore opera bajo una estricta política de cero telemetría.",
                 privacyPolicyFooter: "Política de Privacidad",
                 terms: "Términos",
                 copyright: "© 2026 NexusCore Optimizer. Todos los derechos reservados."
             }
         };
 
-        let currentLang = 'en';
-
-        // ================= TYPING ANIMATION ENGINE =================
-        let typingTimeout = null;
-
-        function startTypingAnimation(titleText, subtitleText) {
-            if (typingTimeout) clearTimeout(typingTimeout);
-
-            const titleEl = document.getElementById('hero-title');
-            const subtitleEl = document.getElementById('hero-subtitle');
-
-            if (!titleEl || !subtitleEl) return;
-
-            titleEl.innerHTML = '';
-            subtitleEl.innerHTML = '';
-
-            let titleIndex = 0;
-            let subtitleIndex = 0;
-
-            function typeTitle() {
-                if (titleIndex < titleText.length) {
-                    titleEl.innerHTML = titleText.substring(0, titleIndex + 1) + '<span class="typing-cursor"></span>';
-                    titleIndex++;
-                    typingTimeout = setTimeout(typeTitle, 22);
-                } else {
-                    titleEl.innerHTML = titleText;
-                    typeSubtitle();
-                }
-            }
-
-            function typeSubtitle() {
-                if (subtitleIndex < subtitleText.length) {
-                    subtitleEl.innerHTML = subtitleText.substring(0, subtitleIndex + 1) + '<span class="typing-cursor" style="height: 0.9em;"></span>';
-                    subtitleIndex++;
-                    typingTimeout = setTimeout(typeSubtitle, 12);
-                } else {
-                    subtitleEl.innerHTML = subtitleText;
-                }
-            }
-
-            typeTitle();
-        }
-
         function changeLanguage(lang) {
-            currentLang = lang;
             const t = translations[lang];
-
+            if (!t) return;
+            
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (t[key]) {
                     el.innerText = t[key];
                 }
             });
-
-            updatePlatformDisplay();
-            startTypingAnimation(t.heroTitle, t.heroSubtitle);
         }
-
-        // ================= PLATFORM SELECTOR TABS LOGIC =================
-        const platformData = [
-            {
-                title: "NexusCore Windows Optimizer Pro",
-                descSq: "Agresiv RAM cache cleaner, background process terminator, latency reduction, dhe një modul i dedikuar për GPU optimization (Nvidia, AMD, Intel).",
-                descEn: "Aggressive RAM cache cleaner, background process terminator, latency reduction, and dedicated GPU optimization module (Nvidia, AMD, Intel).",
-                descDe: "Aggressiver RAM-Cache-Cleaner, Hintergrundprozess-Terminator, Latenzreduzierung und GPU-Optimierungsmodul.",
-                descEs: "Limpiador agresivo de caché RAM, terminación de procesos, reducción de latencia y módulo GPU dedicado.",
-                tags: ["C++ / .NET", "GPU Boost", "Zero Telemetry"],
-                actionText: { sq: "Shkarko .EXE", en: "Download .EXE", de: ".EXE herunterladen", es: "Descargar .EXE" },
-                actionLink: "#download-windows"
-            },
-            {
-                title: "NexusCore Android & Shizuku Engine",
-                descSq: "Ekzekutim i sigurt i komandave të privilegjuara përmes Shizuku API (UID 2000) pa pasur nevojë për Root ose zhbllokuar bootloader-in.",
-                descEn: "Safe execution of privileged shell commands using Shizuku API (UID 2000) without unlocking bootloader or rooting.",
-                descDe: "Sichere Ausführung privilegierter Shell-Befehle über Shizuku API (UID 2000) ohne Root oder Bootloader-Entsperrung.",
-                descEs: "Ejecución segura de comandos mediante Shizuku API (UID 2000) sin desbloquear el bootloader ni root.",
-                tags: ["Shizuku UID 2000", "Touch Sensitivity", "Android 11+"],
-                actionText: { sq: "Shkarko .APK", en: "Download .APK", de: ".APK herunterladen", es: "Descargar .APK" },
-                actionLink: "#download-android"
-            },
-            {
-                title: "Custom Gaming Windows 11 ISO",
-                descSq: "E ndërtuar posaçërisht për lojëra konkurruese dhe emulatorë. Heq telemetrinë dhe bloatin, duke mbajtur proceset në sfond në 30–35.",
-                descEn: "Engineered specifically for competitive gaming and Android emulators. Strips out telemetry and bloat, keeping idle processes at 30–35.",
-                descDe: "Speziell für kompetitives Gaming und Android-Emulatoren entwickelt. Entfernt Telemetrie (30–35 Prozesse).",
-                descEs: "Diseñado para gaming competitivo y emuladores. Elimina telemetría y bloatware (30–35 procesos).",
-                tags: ["30–35 Procese", "Emulator Ready", "Custom Boot"],
-                actionText: { sq: "Merr ISO-n", en: "Get ISO", de: "ISO holen", es: "Obtener ISO" },
-                actionLink: "#download-iso"
-            },
-            {
-                title: "PC Diagnostic & AI Scripting",
-                descSq: "Analizator inteligjent i sistemit që inspekton pengesat e harduerit dhe gjeneron skripte të personalizuara PowerShell dhe Batch.",
-                descEn: "Intelligent system analyzer that inspects hardware bottlenecks and generates custom PowerShell and Batch optimization scripts.",
-                descDe: "Intelligenter Systemanalysator, der Hardware-Engpässe prüft und benutzerdefinierte Skripte generiert.",
-                descEs: "Analizador inteligente que inspecciona cuellos de botella y genera scripts de optimización personalizados.",
-                tags: ["PowerShell / Batch", "Security Audit", "Custom Scripts"],
-                actionText: { sq: "Hap Diagnostikimin", en: "Open Diagnostic", de: "Diagnose öffnen", es: "Abrir Diagnóstico" },
-                actionLink: "#diagnostic"
-            }
-        ];
-
-        let activePlatformIndex = 0;
-
-        function switchPlatform(index) {
-            activePlatformIndex = index;
-
-            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-                if (i === index) {
-                    btn.className = "tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all bg-gradient-to-r from-[#7C3AED] to-[#2563EB] text-white shadow-lg shadow-purple-500/25";
-                } else {
-                    btn.className = "tab-btn px-4 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:text-white hover:bg-white/5";
-                }
-            });
-
-            updatePlatformDisplay();
-        }
-
-        function updatePlatformDisplay() {
-            const data = platformData[activePlatformIndex];
-            const titleEl = document.getElementById('platform-title');
-            const descEl = document.getElementById('platform-desc');
-            const techEl = document.getElementById('platform-tech');
-            const actionBtn = document.getElementById('platform-action');
-
-            if (!titleEl || !descEl || !techEl || !actionBtn) return;
-
-            titleEl.innerText = data.title;
-
-            if (currentLang === 'en') descEl.innerText = data.descEn;
-            else if (currentLang === 'de') descEl.innerText = data.descDe;
-            else if (currentLang === 'es') descEl.innerText = data.descEs;
-            else descEl.innerText = data.descSq;
-
-            techEl.innerHTML = data.tags.map(tag => `<span class="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 text-purple-300 text-xs px-3 py-1 rounded-lg">${tag}</span>`).join('');
-            actionBtn.innerText = data.actionText[currentLang] || data.actionText['en'];
-        }
-
-        // ================= FAQ ACCORDION LOGIC =================
-        function toggleFaq(button) {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('span:last-child');
-            const isOpen = !content.classList.contains('hidden');
-
-            document.querySelectorAll('.faq-content').forEach(item => {
-                item.classList.add('hidden');
-            });
-            document.querySelectorAll('#faq button span:last-child').forEach(ic => {
-                ic.style.transform = 'rotate(0deg)';
-            });
-
-            if (!isOpen) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(45deg)';
-            }
-        }
-
-        // Initialize on window load with English as default
-        window.onload = function() {
-            changeLanguage('en');
-        };
-    </script>
-
-    <!-- ================= FIREBASE AUTHENTICATION (MODULAR SDK v11) ================= -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { 
-            getAuth, 
-            GoogleAuthProvider, 
-            signInWithPopup, 
-            signInWithRedirect, 
-            getRedirectResult, 
-            signOut, 
-            onAuthStateChanged 
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyB122cLsgRooHhkkjBH--z20PANf9kvqOU",
-            authDomain: "nexuscoreoptimizer-7fe3b.firebaseapp.com",
-            projectId: "nexuscoreoptimizer-7fe3b",
-            storageBucket: "nexuscoreoptimizer-7fe3b.firebasestorage.app",
-            messagingSenderId: "243650303939",
-            appId: "1:243650303939:web:649cfb4676f287fdd78f76"
-        };
-
-        // Initialize Firebase App and Auth
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
-
-        window.currentUser = null;
-        window.pendingAction = null;
-
-        function showToast(msg) {
-            const toast = document.getElementById('toastNotice');
-            if (!toast) return;
-            toast.innerText = msg;
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.add('hidden'), 4500);
-        }
-
-        window.openAuthModal = function(reasonText) {
-            const modal = document.getElementById('authPromptModal');
-            const reasonEl = document.getElementById('authPromptReason');
-            const errEl = document.getElementById('authErrorText');
-            if (reasonText && reasonEl) reasonEl.innerText = reasonText;
-            if (errEl) errEl.classList.add('hidden');
-            if (modal) modal.classList.remove('hidden');
-        };
-
-        window.closeAuthModal = function() {
-            const modal = document.getElementById('authPromptModal');
-            if (modal) modal.classList.add('hidden');
-            window.pendingAction = null;
-        };
-
-        // Handle redirect result if user returns from Google Redirect Sign-In
-        getRedirectResult(auth)
-            .then((result) => {
-                if (result && result.user) {
-                    showToast(`Mirësevini, ${result.user.displayName || result.user.email}!`);
-                }
-            })
-            .catch((error) => {
-                if (error && error.code !== 'auth/popup-blocked') {
-                    console.warn("Redirect Auth Info:", error.code);
-                }
-            });
-
-        // Sign in with Google (Popup with automatic fallback handling for blocked popups/iframes)
-        window.loginWithGoogle = async function() {
-            const errEl = document.getElementById('authErrorText');
-            if (errEl) errEl.classList.add('hidden');
-
-            try {
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
-                closeAuthModal();
-                showToast(`Mirësevini, ${user.displayName || user.email}!`);
-
-                // Execute any pending download or AI question automatically
-                if (typeof window.pendingAction === 'function') {
-                    const action = window.pendingAction;
-                    window.pendingAction = null;
-                    action();
-                }
-            } catch (error) {
-                let message = "Dështoi logimi me Google. Provoni përsëri.";
-
-                if (error.code === 'auth/popup-blocked') {
-                    // If browser/iframe blocks popups, inform user clearly & allow redirect if top-level
-                    if (window.self === window.top) {
-                        try {
-                            await signInWithRedirect(auth, provider);
-                            return;
-                        } catch (redirectErr) {
-                            message = "Shfletuesi bllokoi dritaren e Google. Lejoni Pop-ups në shfletues dhe provoni përsëri.";
-                        }
-                    } else {
-                        message = "Dritarja e pamjes paraprake (Preview iframe) bllokon dritaret Pop-up të Google. Eksportoni/hapni faqen në një tab të ri ose lejoni Pop-ups për këtë faqe.";
-                    }
-                } else if (error.code === 'auth/popup-closed-by-user') {
-                    message = "Dritarja e logimit u mbyll përpara se të përfundonte.";
-                } else if (error.code === 'auth/cancelled-popup-request') {
-                    message = "Kërkesa e logimit u anulua.";
-                } else if (error.code === 'auth/unauthorized-domain') {
-                    message = `Domain-i (${window.location.hostname}) nuk është i autorizuar në Firebase Console (Authentication -> Settings -> Authorized domains).`;
-                }
-
-                if (errEl) {
-                    errEl.innerText = message;
-                    errEl.classList.remove('hidden');
-                } else {
-                    showToast(message);
-                }
-            }
-        };
-
-        // Sign out user
-        window.logoutUser = async function() {
-            try {
-                await signOut(auth);
-                showToast("Dolët nga llogaria me sukses.");
-            } catch (error) {
-                showToast("Gabim gjatë daljes nga llogaria.");
-            }
-        };
-
-        // Guard downloads behind Google Sign-In
-        window.handleProtectedDownload = function(e, itemName) {
-            if (!window.currentUser) {
-                e.preventDefault();
-                window.pendingAction = () => {
-                    showToast(`Duke nisur shkarkimin për: ${itemName}...`);
-                };
-                openAuthModal(`Ju lutemi logohuni me Google për të shkarkuar "${itemName}".`);
-            } else {
-                e.preventDefault();
-                showToast(`Duke nisur shkarkimin për: ${itemName}...`);
-            }
-        };
-
-        // Persist user session across page refreshes
-        onAuthStateChanged(auth, (user) => {
-            window.currentUser = user;
-            const loginBtn = document.getElementById('googleLoginBtn');
-            const profileBox = document.getElementById('userProfile');
-            const avatarEl = document.getElementById('userAvatar');
-            const nameEl = document.getElementById('userName');
-            const emailEl = document.getElementById('userEmail');
-
-            if (user) {
-                if (loginBtn) loginBtn.classList.add('hidden');
-                if (profileBox) profileBox.classList.remove('hidden');
-                if (avatarEl) avatarEl.src = user.photoURL || 'https://placehold.co/64x64/7C3AED/FFFFFF?text=U';
-                if (nameEl) nameEl.innerText = user.displayName || 'Përdorues';
-                if (emailEl) emailEl.innerText = user.email || '';
-            } else {
-                if (loginBtn) loginBtn.classList.remove('hidden');
-                if (profileBox) profileBox.classList.add('hidden');
-            }
-        });
     </script>
 </body>
 </html>
