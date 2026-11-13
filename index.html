@@ -199,7 +199,7 @@
                     </button>
 
                     <!-- User Profile Pill (Shown when logged in) -->
-                    <div id="userProfile" class="hidden flex items-center gap-2.5 bg-[#12121a]/90 border border-white/20 rounded-full pl-1.5 pr-3 py-1 backdrop-blur-md">
+                    <div id="userProfile" class="hidden items-center gap-2.5 bg-[#12121a]/90 border border-white/20 rounded-full pl-1.5 pr-3 py-1 backdrop-blur-md">
                         <img id="userAvatar" src="" alt="Profile" class="w-7 h-7 rounded-full object-cover border border-white/30">
                         <div class="hidden sm:flex flex-col text-left leading-tight">
                             <span id="userName" class="text-xs font-semibold text-white truncate max-w-[110px]"></span>
@@ -797,6 +797,84 @@
     </div>
 
     <!-- ================= JAVASCRIPT LOGIC & LOCALIZATION ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB122cLsgRooHhkkjBH--z20PANf9kvqOU",
+            authDomain: "nexuscoreoptimizer-7fe3b.firebaseapp.com",
+            projectId: "nexuscoreoptimizer-7fe3b",
+            storageBucket: "nexuscoreoptimizer-7fe3b.firebasestorage.app",
+            messagingSenderId: "243650303939",
+            appId: "1:243650303939:web:649cfb4676f287fdd78f76"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        window.currentUser = null;
+
+        window.loginWithGoogle = async function() {
+            closeAuthModal();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                window.currentUser = {
+                    name: user.displayName || "NexusCore User",
+                    email: user.email,
+                    avatar: user.photoURL || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                };
+                updateUIAuth();
+                showToast("Successfully signed in with Google!");
+            } catch (error) {
+                console.error("Google Auth Error:", error);
+                showToast("Google Login failed: " + error.message);
+            }
+        };
+
+        window.logoutUser = async function() {
+            try {
+                await signOut(auth);
+                window.currentUser = null;
+                updateUIAuth();
+                showToast("Logged out successfully.");
+            } catch (error) {
+                console.error("Logout Error:", error);
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.currentUser = {
+                    name: user.displayName || "NexusCore User",
+                    email: user.email,
+                    avatar: user.photoURL || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+                };
+            } else {
+                window.currentUser = null;
+            }
+            updateUIAuth();
+        });
+
+        function updateUIAuth() {
+            const googleLoginBtn = document.getElementById('googleLoginBtn');
+            const profile = document.getElementById('userProfile');
+            if (window.currentUser) {
+                googleLoginBtn.classList.add('hidden');
+                profile.classList.remove('hidden');
+                profile.classList.add('flex');
+                document.getElementById('userName').innerText = window.currentUser.name;
+                document.getElementById('userEmail').innerText = window.currentUser.email;
+                document.getElementById('userAvatar').src = window.currentUser.avatar;
+            } else {
+                profile.classList.add('hidden');
+                profile.classList.remove('flex');
+                googleLoginBtn.classList.remove('hidden');
+            }
+        }
+    </script>
     <script>
         const canvas = document.getElementById('dot-canvas');
         const ctx = canvas.getContext('2d');
@@ -1048,18 +1126,16 @@
             }
         });
 
-        // Auth & Protected Download Logic
-        let currentUser = null;
-
+        // Protected Download Logic
         function handleProtectedDownload(event, productName) {
             event.preventDefault();
-            if (!currentUser) {
+            if (!window.currentUser) {
                 document.getElementById('authPromptReason').innerText = `Please sign in with your Google account to download "${productName}".`;
                 document.getElementById('authPromptModal').classList.remove('hidden');
             } else {
                 showToast(`Starting secure download for ${productName}...`);
                 setTimeout(() => {
-                    const blob = new Blob([`NexusCore Optimizer Package - ${productName}\nAuthenticated User: ${currentUser.email}\nStatus: Verified Pro License`], { type: 'text/plain' });
+                    const blob = new Blob([`NexusCore Optimizer Package - ${productName}\nAuthenticated User: ${window.currentUser.email}\nStatus: Verified Pro License`], { type: 'text/plain' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
@@ -1074,35 +1150,6 @@
 
         function closeAuthModal() {
             document.getElementById('authPromptModal').classList.add('hidden');
-        }
-
-        // Google Login Simulation
-        function loginWithGoogle() {
-            closeAuthModal();
-            // Simulate successful Google Authentication
-            currentUser = {
-                name: "Shpëtim Sefa",
-                email: "nexuscoreoptimizer@gmail.com",
-                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
-            };
-
-            document.getElementById('googleLoginBtn').classList.add('hidden');
-            const profile = document.getElementById('userProfile');
-            profile.classList.remove('hidden');
-            profile.classList.add('flex');
-            document.getElementById('userName').innerText = currentUser.name;
-            document.getElementById('userEmail').innerText = currentUser.email;
-            document.getElementById('userAvatar').src = currentUser.avatar;
-
-            showToast("Successfully signed in with Google!");
-        }
-
-        function logoutUser() {
-            currentUser = null;
-            document.getElementById('userProfile').classList.add('hidden');
-            document.getElementById('userProfile').classList.remove('flex');
-            document.getElementById('googleLoginBtn').classList.remove('hidden');
-            showToast("Logged out successfully.");
         }
 
         // Toast Notification Helper
@@ -1126,7 +1173,6 @@
         let hasMoved = false;
 
         widgetContainer.addEventListener('mousedown', (e) => {
-            // Prevent drag if clicking inside the chat window
             if (e.target.closest('#aiChatWindow') && !e.target.closest('#aiChatWindow > div:first-child')) return;
             isDragging = true;
             hasMoved = false;
@@ -1155,7 +1201,6 @@
             let newLeft = initialLeft + dx;
             let newTop = initialTop + dy;
             
-            // Constrain within window bounds
             const maxLeft = window.innerWidth - widgetContainer.offsetWidth;
             const maxTop = window.innerHeight - widgetContainer.offsetHeight;
             
@@ -1170,7 +1215,6 @@
             isDragging = false;
         });
 
-        // Touch support for dragging on mobile/tablet
         widgetContainer.addEventListener('touchstart', (e) => {
             if (e.target.closest('#aiChatWindow') && !e.target.closest('#aiChatWindow > div:first-child')) return;
             isDragging = true;
@@ -1215,7 +1259,6 @@
             isDragging = false;
         });
 
-        // Floating AI Widget Toggle (only toggles if it wasn't dragged)
         function toggleAIChat() {
             if (hasMoved) return;
             const win = document.getElementById('aiChatWindow');
@@ -1228,7 +1271,6 @@
             }
         }
 
-        // Live Gemini AI Chat Integration using provided API Key
         async function sendGeminiMessage() {
             const input = document.getElementById('chatInput');
             const text = input.value.trim();
@@ -1236,7 +1278,6 @@
 
             const chatMessages = document.getElementById('chatMessages');
 
-            // User Message Bubble
             const userBubble = document.createElement('div');
             userBubble.className = "bg-white/10 border border-white/20 rounded-2xl p-3 max-w-[85%] ml-auto leading-relaxed relative group";
             userBubble.innerHTML = `<div class="msg-text">${escapeHtml(text)}</div><button onclick="copyMessageText(this)" class="mt-2 inline-flex items-center gap-1 text-[10px] text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 px-2 py-0.5 rounded transition" title="Copy"><span>Copy</span></button>`;
@@ -1244,7 +1285,6 @@
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // AI Loading / Typing Bubble
             const aiBubble = document.createElement('div');
             aiBubble.className = "bg-white/5 border border-white/15 rounded-2xl p-3 max-w-[85%] leading-relaxed relative group space-y-2";
             aiBubble.innerHTML = `<div class="msg-text text-slate-400 italic">NexusCore Gemini AI is analyzing your hardware request...</div>`;
@@ -1252,8 +1292,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                // Call Gemini API using gemini-3-flash-preview model and user API key
-                const apiKey = "AQ.Ab8RN6LZ_dbLgzNkVegqH5m0V7ixuHDse81SVwxhyA4uG2m9ng";
+                const apiKey = "";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
                 
                 const response = await fetch(apiUrl, {
