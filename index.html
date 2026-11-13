@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050507;
+            background-color: #000000;
             color: #f8fafc;
             overflow-x: hidden;
         }
@@ -73,10 +73,22 @@
     <!-- ================= SECTION A: MINIMALIST TOP NAVIGATION BAR ================= -->
     <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#050507]/80 border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Left Side: Brand Wordmark -->
+            <!-- Left Side: Custom SVG Logo -->
             <div class="flex items-center space-x-3">
-                <a href="#" class="text-xl sm:text-2xl font-extrabold font-brand tracking-tight text-white flex items-center gap-2">
-                    NexusCore
+                <a href="#" class="flex items-center gap-2">
+                    <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto">
+                        <defs>
+                            <linearGradient id="ncGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#22d3ee"/>
+                                <stop offset="35%" stop-color="#3b82f6"/>
+                                <stop offset="65%" stop-color="#a855f7"/>
+                                <stop offset="100%" stop-color="#4c1d95"/>
+                            </linearGradient>
+                        </defs>
+                        <path fill="url(#ncGrad)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
+                        <path fill="url(#ncGrad)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
+                        <path fill="url(#ncGrad)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
+                    </svg>
                 </a>
             </div>
 
@@ -119,13 +131,12 @@
         <!-- Interactive Center Box (Stitch Style Platform Selector) -->
         <div class="liquid-glass rounded-3xl max-w-4xl mx-auto p-6 sm:p-8 text-left relative overflow-hidden">
             <!-- Top bar inside card -->
-            <div class="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-8">
+            <div class="flex items-center justify-between pb-6 border-b border-white/[0.08] mb-8 hidden">
                 <div class="flex items-center space-x-3">
-                    <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 animate-pulse shadow-[0_0_12px_#7c3aed]"></div>
+                    <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 shadow-[0_0_12px_#7c3aed]"></div>
                     <span id="card-header-tag" class="text-xs uppercase tracking-wider font-semibold text-slate-300">Select your platform</span>
                 </div>
                 <div class="flex items-center space-x-2 bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">
-                    <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
                     <span id="system-status" class="text-xs font-medium text-purple-400">System Ready</span>
                 </div>
             </div>
@@ -230,23 +241,23 @@
     </section>
 
     <!-- ================= SECTION D: LIVE PERFORMANCE METRICS STRIP ================= -->
-    <section class="py-12 border-y border-white/[0.08] bg-black/40 backdrop-blur-xl relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-1">-65%</div>
-                <div class="text-xs sm:text-sm text-slate-400" data-i18n="m1">Background Processes</div>
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">-65%</div>
+                <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m1">Background Processes</div>
             </div>
-            <div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-1">+40%</div>
-                <div class="text-xs sm:text-sm text-slate-400" data-i18n="m2">FPS Stability</div>
+            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">+40%</div>
+                <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m2">FPS Stability</div>
             </div>
-            <div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-1">0%</div>
-                <div class="text-xs sm:text-sm text-slate-400" data-i18n="m3">Root Required</div>
+            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">0%</div>
+                <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m3">Root Required</div>
             </div>
-            <div>
-                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-1">&lt; 15ms</div>
-                <div class="text-xs sm:text-sm text-slate-400" data-i18n="m4">System Latency</div>
+            <div class="liquid-glass rounded-3xl p-6 text-center transition-all hover:border-purple-500/30">
+                <div class="text-3xl sm:text-4xl font-extrabold text-purple-400 mb-2">&lt; 15ms</div>
+                <div class="text-xs sm:text-sm text-slate-300 font-medium" data-i18n="m4">System Latency</div>
             </div>
         </div>
     </section>
@@ -420,7 +431,19 @@
     <footer class="border-t border-white/[0.08] py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center text-slate-500 text-sm relative z-10">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-2">
-                <span class="text-white font-semibold font-['Outfit']">NexusCore Systems</span>
+                <svg viewBox="0 0 812 638" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+                    <defs>
+                        <linearGradient id="ncGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#22d3ee"/>
+                            <stop offset="35%" stop-color="#3b82f6"/>
+                            <stop offset="65%" stop-color="#a855f7"/>
+                            <stop offset="100%" stop-color="#4c1d95"/>
+                        </linearGradient>
+                    </defs>
+                    <path fill="url(#ncGradFooter)" d="M 40,464 L 155,465 L 329,218 L 339,467 L 455,466 L 576,297 L 688,300 L 642,383 L 752,383 L 812,294 L 752,211 L 516,211 L 454,290 L 452,42 L 335,40 Z"/>
+                    <path fill="url(#ncGradFooter)" d="M 748,44 L 743,41 L 634,42 L 538,178 L 538,187 L 649,188 L 743,57 Z"/>
+                    <path fill="url(#ncGradFooter)" d="M 689,469 L 575,467 L 511,553 L 399,551 L 432,498 L 429,490 L 319,490 L 276,554 L 335,638 L 572,638 Z"/>
+                </svg>
             </div>
             <div class="flex items-center space-x-6 text-sm">
                 <a href="https://github.com" target="_blank" class="hover:text-white transition" data-i18n="github">GitHub</a>
@@ -544,7 +567,6 @@
         function drawDots() {
             ctx.clearRect(0, 0, width, height);
 
-            // Get hero text bounding box to keep dots parted around text if desired, or let mouse repel them
             for (let x = spacing / 2; x < width; x += spacing) {
                 for (let y = spacing / 2; y < height; y += spacing) {
                     let dx = mouse.x - x;
@@ -553,7 +575,7 @@
                     let maxDist = 180;
 
                     let radius = 1.2;
-                    let alpha = 0.15;
+                    let alpha = 0.25;
 
                     if (dist < maxDist) {
                         let force = (1 - dist / maxDist);
@@ -563,8 +585,8 @@
                         let shiftX = x - Math.cos(angle) * force * 24;
                         let shiftY = y - Math.sin(angle) * force * 24;
 
-                        radius = 1.2 + force * 2.2;
-                        alpha = 0.15 + force * 0.6;
+                        radius = 1.2 + force * 2.5;
+                        alpha = 0.25 + force * 0.75;
 
                         ctx.beginPath();
                         ctx.arc(shiftX, shiftY, radius, 0, Math.PI * 2);
